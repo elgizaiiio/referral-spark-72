@@ -35,7 +35,7 @@ export function LandingFooter() {
             <h4 className="text-xs sm:text-sm font-bold text-foreground uppercase tracking-wider mb-4">Legal</h4>
             <div className="flex flex-col gap-2">
               <a target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors" href="https://terms.megsyai.com/">Terms of Service</a>
-              <a href="https://megsyai.com/privacy" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</a>
+              <a target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors" href="https://privacy.megsyai.com/">Privacy Policy</a>
             </div>
           </div>
         </div>
