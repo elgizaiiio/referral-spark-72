@@ -116,7 +116,6 @@ export default function Login() {
               onClick={handleLogin}
               className="w-full h-14 gradient-cta border-0 text-foreground hover:opacity-90 rounded-2xl font-bold text-sm gap-3 shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]"
             >
-              <img src={logo} alt="" className="h-6 w-6 rounded-lg" />
               Login with Megsy
             </Button>
 
