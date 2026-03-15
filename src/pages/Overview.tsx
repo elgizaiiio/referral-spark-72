@@ -29,10 +29,7 @@ export default function Overview() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-foreground">Overview</h1>
-        <p className="text-sm text-muted-foreground">Track your referrals and earnings at a glance</p>
-      </div>
+      <h1 className="heading-massive text-3xl lg:text-4xl text-foreground">OVERVIEW</h1>
 
       <ReferralLinkCard referralCode={referralCode} />
 

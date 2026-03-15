@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
@@ -49,7 +49,6 @@ export function SettingsForm({ userId, referralCode, userEmail }: SettingsFormPr
         notify_on_earning: notifyEarning,
         updated_at: new Date().toISOString(),
       }, { onConflict: "user_id" });
-
     if (error) toast.error(error.message);
     else toast.success("Settings saved!");
     setSaving(false);
@@ -58,35 +57,29 @@ export function SettingsForm({ userId, referralCode, userEmail }: SettingsFormPr
   return (
     <div className="space-y-6">
       <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Account Information</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="p-6 space-y-4">
+          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">ACCOUNT INFORMATION</h3>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Email</label>
-              <Input value={userEmail} disabled className="bg-muted" />
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Email</label>
+              <Input value={userEmail} disabled className="bg-muted border-border" />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Referral Code</label>
-              <Input value={referralCode} disabled className="bg-muted font-mono" />
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Referral Code</label>
+              <Input value={referralCode} disabled className="bg-muted border-border font-mono" />
             </div>
           </div>
         </CardContent>
       </Card>
 
       <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Payment Preferences</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="p-6 space-y-4">
+          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">PAYMENT PREFERENCES</h3>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Payment Method</label>
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Payment Method</label>
               <Select value={paymentMethod} onValueChange={setPaymentMethod}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
+                <SelectTrigger className="bg-background border-border"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="paypal">PayPal</SelectItem>
                   <SelectItem value="bank_transfer">Bank Transfer</SelectItem>
@@ -95,41 +88,35 @@ export function SettingsForm({ userId, referralCode, userEmail }: SettingsFormPr
               </Select>
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Payment Details</label>
-              <Input
-                value={paymentDetails}
-                onChange={(e) => setPaymentDetails(e.target.value)}
-                placeholder="PayPal email, bank IBAN, or wallet address"
-              />
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Payment Details</label>
+              <Input value={paymentDetails} onChange={(e) => setPaymentDetails(e.target.value)} placeholder="PayPal email, bank IBAN, or wallet" className="bg-background border-border" />
             </div>
           </div>
         </CardContent>
       </Card>
 
       <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Notifications</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="p-6 space-y-4">
+          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">NOTIFICATIONS</h3>
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-foreground">New Signup Notifications</p>
-              <p className="text-sm text-muted-foreground">Get notified when someone signs up with your link</p>
+              <p className="text-sm font-bold text-foreground">New Signup Notifications</p>
+              <p className="text-xs text-muted-foreground">Get notified when someone signs up with your link</p>
             </div>
             <Switch checked={notifySignup} onCheckedChange={setNotifySignup} />
           </div>
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-foreground">Earning Notifications</p>
-              <p className="text-sm text-muted-foreground">Get notified when you earn commission</p>
+              <p className="text-sm font-bold text-foreground">Earning Notifications</p>
+              <p className="text-xs text-muted-foreground">Get notified when you earn commission</p>
             </div>
             <Switch checked={notifyEarning} onCheckedChange={setNotifyEarning} />
           </div>
         </CardContent>
       </Card>
 
-      <Button onClick={handleSave} disabled={saving}>
-        {saving ? "Saving..." : "Save Settings"}
+      <Button onClick={handleSave} disabled={saving} className="gradient-cta border-0 text-foreground hover:opacity-90 font-bold rounded-full px-8">
+        {saving ? "SAVING..." : "SAVE SETTINGS"}
       </Button>
     </div>
   );

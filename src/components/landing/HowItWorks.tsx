@@ -1,62 +1,75 @@
-import { Share2, UserPlus, DollarSign } from "lucide-react";
 import { motion } from "framer-motion";
 
 const steps = [
   {
-    num: "01",
-    title: "Share Your Link",
-    desc: "Get your unique referral link and share it with friends, followers, and communities.",
-    icon: Share2,
-    color: "from-primary to-primary-glow",
+    number: "01",
+    title: "CREATE YOUR ACCOUNT",
+    description: "Sign up for free and get your unique partner dashboard with all the tools you need.",
+    borderColor: "border-t-[hsl(175,70%,40%)]",
+    numColor: "text-[hsl(175,70%,40%)]",
   },
   {
-    num: "02",
-    title: "Friends Sign Up",
-    desc: "When someone signs up through your link, they're tracked as your referral automatically.",
-    icon: UserPlus,
-    color: "from-primary-glow to-chart-5",
+    number: "02",
+    title: "GET YOUR LINK",
+    description: "Copy your unique referral link that tracks all clicks, signups, and conversions automatically.",
+    borderColor: "border-t-[hsl(0,60%,45%)]",
+    numColor: "text-[hsl(0,60%,45%)]",
   },
   {
-    num: "03",
-    title: "Earn Commission",
-    desc: "Earn 20% of every subscription payment your referrals make. Withdraw anytime.",
-    icon: DollarSign,
-    color: "from-success to-chart-2",
+    number: "03",
+    title: "SHARE EVERYWHERE",
+    description: "Post on social media, blogs, YouTube, or send directly to friends. We give you templates.",
+    borderColor: "border-t-[hsl(271,60%,50%)]",
+    numColor: "text-[hsl(271,60%,50%)]",
+  },
+  {
+    number: "04",
+    title: "PEOPLE SIGN UP",
+    description: "When someone uses your link and subscribes to Megsy AI, you earn commission instantly.",
+    borderColor: "border-t-[hsl(140,50%,35%)]",
+    numColor: "text-[hsl(140,50%,35%)]",
+  },
+  {
+    number: "05",
+    title: "GET PAID",
+    description: "Withdraw your earnings via PayPal, bank transfer, or crypto. No minimum threshold.",
+    borderColor: "border-t-[hsl(38,70%,50%)]",
+    numColor: "text-[hsl(38,70%,50%)]",
   },
 ];
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-20 lg:py-32">
+    <section id="how-it-works" className="py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center"
+          className="text-center mb-16"
         >
-          <p className="text-sm font-semibold uppercase tracking-widest text-primary">GET STARTED</p>
-          <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl lg:text-5xl">
-            How It <span className="gradient-text">Works</span>
+          <h2 className="heading-massive text-4xl sm:text-5xl lg:text-7xl text-foreground">
+            GET STARTED{" "}
+            <span className="gradient-text">WITH MEGSY</span>
           </h2>
+          <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
+            Five simple steps to start earning real money
+          </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {steps.map((step, i) => (
             <motion.div
-              key={step.num}
+              key={step.number}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="group relative rounded-2xl border border-border bg-card p-8 transition-all duration-300 hover:border-primary/40 hover:glow-primary"
+              transition={{ delay: i * 0.1 }}
+              className={`bg-card rounded-xl border border-border ${step.borderColor} border-t-2 p-6 flex flex-col`}
             >
-              <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${step.color}`}>
-                <step.icon className="h-6 w-6 text-foreground" />
-              </div>
-              <span className="absolute right-6 top-6 text-5xl font-black text-foreground/5">{step.num}</span>
-              <h3 className="mt-6 text-xl font-bold text-foreground">{step.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+              <span className={`text-4xl font-black ${step.numColor}`}>{step.number}</span>
+              <h3 className="mt-4 text-base font-bold text-foreground uppercase tracking-wide">{step.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{step.description}</p>
             </motion.div>
           ))}
         </div>

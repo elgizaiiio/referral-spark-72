@@ -1,57 +1,54 @@
-import { Check } from "lucide-react";
 import { motion } from "framer-motion";
 
 const perks = [
-  "20% recurring commission on all subscription payments",
-  "Commission on every plan — Starter, Pro, and Business",
-  "No cap on how much you can earn",
-  "Real-time tracking of all referrals and earnings",
-  "Multiple payout methods: PayPal, Bank, Crypto",
-  "Dedicated dashboard to manage everything",
+  "20% recurring commission on all subscriptions",
+  "No cap on earnings — unlimited potential",
+  "Real-time tracking dashboard",
+  "Marketing materials and templates included",
+  "Withdraw via PayPal, bank, or crypto",
+  "No minimum payout threshold",
+  "Performance bonuses for top partners",
+  "Priority partner support",
 ];
 
 export function CommissionInfo() {
   return (
-    <section id="commission" className="py-20 lg:py-32 border-t border-border">
-      <div className="mx-auto max-w-7xl px-4 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <p className="text-sm font-semibold uppercase tracking-widest text-primary">COMMISSION STRUCTURE</p>
-            <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
-              Simple, <span className="gradient-text">Generous</span> Rewards
-            </h2>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              We believe in rewarding our community. That's why we offer one of the most generous referral programs in the AI industry.
-            </p>
-          </motion.div>
+    <section id="commission" className="py-24 lg:py-32">
+      <div className="mx-auto max-w-4xl px-4 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="heading-massive text-4xl sm:text-5xl lg:text-7xl text-foreground">
+            THE <span className="gradient-text">DEAL</span>
+          </h2>
+          <p className="mt-4 text-muted-foreground text-lg">
+            Simple, transparent, and designed for your success
+          </p>
+        </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-4"
-          >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-card rounded-2xl border border-border p-8 lg:p-12"
+        >
+          <div className="text-center mb-8">
+            <p className="text-7xl lg:text-8xl font-black gradient-text">20%</p>
+            <p className="mt-2 text-lg text-muted-foreground">Recurring Commission</p>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
             {perks.map((perk, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="flex items-start gap-3"
-              >
-                <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success/20">
-                  <Check className="h-3 w-3 text-success" />
-                </div>
-                <p className="text-sm text-foreground">{perk}</p>
-              </motion.div>
+              <div key={i} className="flex items-start gap-3 py-2">
+                <span className="mt-1 h-2 w-2 rounded-full bg-primary shrink-0" />
+                <span className="text-sm text-foreground">{perk}</span>
+              </div>
             ))}
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

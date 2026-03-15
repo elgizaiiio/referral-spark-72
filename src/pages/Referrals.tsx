@@ -13,10 +13,8 @@ export default function Referrals() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-foreground">Referrals</h1>
-        <p className="text-sm text-muted-foreground">View all your referral history with filtering and sorting</p>
-      </div>
+      <h1 className="heading-massive text-3xl lg:text-4xl text-foreground">REFERRALS</h1>
+      <p className="text-sm text-muted-foreground">All your referral history with filtering and sorting</p>
       <ReferralsTable referrals={referrals} />
     </div>
   );

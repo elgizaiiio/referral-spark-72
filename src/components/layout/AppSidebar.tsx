@@ -1,4 +1,3 @@
-import { LayoutDashboard, Users, Wallet, Settings, LogOut } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useAuth } from "@/hooks/useAuth";
 import {
@@ -6,7 +5,6 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -14,12 +12,14 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 
 const navItems = [
-  { title: "Overview", url: "/", icon: LayoutDashboard },
-  { title: "Referrals", url: "/referrals", icon: Users },
-  { title: "Payouts", url: "/payouts", icon: Wallet },
-  { title: "Settings", url: "/settings", icon: Settings },
+  { title: "OVERVIEW", url: "/" },
+  { title: "REFERRALS", url: "/referrals" },
+  { title: "PAYOUTS", url: "/payouts" },
+  { title: "RESOURCES", url: "/resources" },
+  { title: "SETTINGS", url: "/settings" },
 ];
 
 export function AppSidebar() {
@@ -31,16 +31,12 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            {!collapsed && (
-              <div className="flex items-center gap-2 px-1 py-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-cta font-bold text-foreground text-sm">
-                  M
-                </div>
-                <span className="text-base font-bold text-foreground">Megsy Referrals</span>
-              </div>
-            )}
-          </SidebarGroupLabel>
+          {!collapsed && (
+            <div className="flex items-center gap-2.5 px-3 py-4">
+              <img src={logo} alt="Megsy" className="h-8 w-8 rounded-lg" />
+              <span className="text-sm font-black text-foreground uppercase tracking-wider">MEGSY PARTNERS</span>
+            </div>
+          )}
           <SidebarGroupContent>
             <SidebarMenu>
               {navItems.map((item) => (
@@ -49,10 +45,9 @@ export function AppSidebar() {
                     <NavLink
                       to={item.url}
                       end={item.url === "/"}
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground"
-                      activeClassName="bg-primary/10 text-primary font-semibold"
+                      className="flex items-center rounded-lg px-3 py-2.5 text-xs font-bold text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground uppercase tracking-wider"
+                      activeClassName="bg-primary/10 text-primary"
                     >
-                      <item.icon className="h-5 w-5 shrink-0" />
                       {!collapsed && <span>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
@@ -65,11 +60,10 @@ export function AppSidebar() {
       <SidebarFooter className="p-3">
         <Button
           variant="ghost"
-          className="w-full justify-start gap-3 text-muted-foreground hover:text-destructive"
+          className="w-full justify-start text-xs font-bold text-muted-foreground hover:text-destructive uppercase tracking-wider"
           onClick={signOut}
         >
-          <LogOut className="h-5 w-5" />
-          {!collapsed && <span>Sign Out</span>}
+          {!collapsed && <span>SIGN OUT</span>}
         </Button>
       </SidebarFooter>
     </Sidebar>
