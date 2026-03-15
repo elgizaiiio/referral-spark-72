@@ -148,19 +148,6 @@ export default function Login() {
             </p>
           </div>
 
-          {/* Mobile-only commission teaser */}
-          <div className="lg:hidden pt-2">
-            <div className="flex items-center justify-between rounded-2xl border border-border bg-card/50 p-4">
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Commission Rate</p>
-                <p className="text-xl font-black gradient-text">20% Forever</p>
-              </div>
-              <div className="text-right">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Recurring</p>
-                <p className="text-xl font-black text-foreground">∞</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
