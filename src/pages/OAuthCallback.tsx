@@ -55,7 +55,7 @@ export default function OAuthCallback() {
         return;
       }
 
-      setStatus("جاري إنشاء الجلسة...");
+      setStatus("Creating session...");
 
       // Use the magic link token to establish session
       const { error: verifyError } = await supabase.auth.verifyOtp({
