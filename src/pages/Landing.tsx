@@ -7,8 +7,6 @@ import { ProductShowcase } from "@/components/landing/ProductShowcase";
 import { PricingSection } from "@/components/landing/PricingSection";
 import { EarningsCalculator } from "@/components/landing/EarningsCalculator";
 import { EarningExamples } from "@/components/landing/EarningExamples";
-import { CommissionStructure } from "@/components/landing/CommissionStructure";
-import { MilestoneBonuses } from "@/components/landing/MilestoneBonuses";
 import { FeaturesGrid } from "@/components/landing/FeaturesGrid";
 import { BenefitsGrid } from "@/components/landing/BenefitsGrid";
 import { ToolsPreview } from "@/components/landing/ToolsPreview";
