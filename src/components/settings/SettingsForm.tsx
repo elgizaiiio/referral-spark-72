@@ -3,7 +3,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
@@ -16,7 +15,6 @@ interface SettingsFormProps {
 
 export function SettingsForm({ userId, referralCode, userEmail }: SettingsFormProps) {
   const { signOut } = useAuth();
-  const [paymentMethod, setPaymentMethod] = useState("paypal");
   const [paymentDetails, setPaymentDetails] = useState("");
   const [notifySignup, setNotifySignup] = useState(true);
   const [notifyEarning, setNotifyEarning] = useState(true);
@@ -32,7 +30,6 @@ export function SettingsForm({ userId, referralCode, userEmail }: SettingsFormPr
         .eq("user_id", userId)
         .maybeSingle();
       if (data) {
-        setPaymentMethod(data.payment_method || "paypal");
         setPaymentDetails(data.payment_details || "");
         setNotifySignup(data.notify_on_signup ?? true);
         setNotifyEarning(data.notify_on_earning ?? true);
@@ -47,7 +44,6 @@ export function SettingsForm({ userId, referralCode, userEmail }: SettingsFormPr
       .from("rp_portal_settings")
       .upsert({
         user_id: userId,
-        payment_method: paymentMethod,
         payment_details: paymentDetails,
         notify_on_signup: notifySignup,
         notify_on_earning: notifyEarning,
@@ -73,78 +69,57 @@ export function SettingsForm({ userId, referralCode, userEmail }: SettingsFormPr
     setChangingPassword(false);
   };
 
-  const placeholderMap: Record<string, string> = {
-    paypal: "PayPal email address",
-    bank_transfer: "Bank name, IBAN, SWIFT code",
-    crypto: "USDT wallet address (TRC-20 or ERC-20)",
-    wise: "Wise email or account number",
-  };
-
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <Card>
-        <CardContent className="p-6 space-y-4">
-          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">ACCOUNT INFORMATION</h3>
-          <div className="grid gap-4 sm:grid-cols-2">
+        <CardContent className="p-4 sm:p-6 space-y-4">
+          <h3 className="text-xs sm:text-sm font-bold text-foreground uppercase tracking-wider">ACCOUNT INFORMATION</h3>
+          <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2">
             <div className="space-y-2">
-              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Email</label>
-              <Input value={userEmail} disabled className="bg-muted border-border" />
+              <label className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider">Email</label>
+              <Input value={userEmail} disabled className="bg-muted border-border text-xs sm:text-sm" />
             </div>
             <div className="space-y-2">
-              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Referral Code</label>
-              <Input value={referralCode} disabled className="bg-muted border-border font-mono" />
+              <label className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider">Referral Code</label>
+              <Input value={referralCode} disabled className="bg-muted border-border font-mono text-xs sm:text-sm" />
             </div>
           </div>
           <div className="space-y-2">
-            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Referral Link</label>
-            <Input value={`https://megsyai.com?ref=${referralCode}`} disabled className="bg-muted border-border font-mono text-sm" />
+            <label className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider">Referral Link</label>
+            <Input value={`https://megsyai.com?ref=${referralCode}`} disabled className="bg-muted border-border font-mono text-xs sm:text-sm" />
           </div>
         </CardContent>
       </Card>
 
       <Card>
-        <CardContent className="p-6 space-y-4">
-          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">PAYMENT PREFERENCES</h3>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Payment Method</label>
-              <Select value={paymentMethod} onValueChange={setPaymentMethod}>
-                <SelectTrigger className="bg-background border-border"><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="paypal">PayPal (1-2 hours)</SelectItem>
-                  <SelectItem value="bank_transfer">Bank Transfer (2-3 days)</SelectItem>
-                  <SelectItem value="crypto">Crypto USDT (Instant)</SelectItem>
-                  <SelectItem value="wise">Wise (1-2 days)</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Payment Details</label>
-              <Input
-                value={paymentDetails}
-                onChange={(e) => setPaymentDetails(e.target.value)}
-                placeholder={placeholderMap[paymentMethod] || "Payment details"}
-                className="bg-background border-border"
-              />
-            </div>
+        <CardContent className="p-4 sm:p-6 space-y-4">
+          <h3 className="text-xs sm:text-sm font-bold text-foreground uppercase tracking-wider">PAYMENT DETAILS</h3>
+          <div className="space-y-2">
+            <label className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider">Payment Information</label>
+            <Input
+              value={paymentDetails}
+              onChange={(e) => setPaymentDetails(e.target.value)}
+              placeholder="Your payment details for withdrawals"
+              className="bg-background border-border text-xs sm:text-sm"
+            />
           </div>
         </CardContent>
       </Card>
 
       <Card>
-        <CardContent className="p-6 space-y-4">
-          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">NOTIFICATIONS</h3>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-bold text-foreground">New Signup Notifications</p>
-              <p className="text-xs text-muted-foreground">Get notified when someone signs up with your link</p>
+        <CardContent className="p-4 sm:p-6 space-y-4">
+          <h3 className="text-xs sm:text-sm font-bold text-foreground uppercase tracking-wider">NOTIFICATIONS</h3>
+          <div className="flex items-center justify-between gap-4">
+            <div className="min-w-0">
+              <p className="text-xs sm:text-sm font-bold text-foreground">New Signup Notifications</p>
+              <p className="text-[10px] sm:text-xs text-muted-foreground">Get notified when someone signs up with your link</p>
             </div>
             <Switch checked={notifySignup} onCheckedChange={setNotifySignup} />
           </div>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-bold text-foreground">Earning Notifications</p>
-              <p className="text-xs text-muted-foreground">Get notified when you earn commission</p>
+          <div className="flex items-center justify-between gap-4">
+            <div className="min-w-0">
+              <p className="text-xs sm:text-sm font-bold text-foreground">Earning Notifications</p>
+              <p className="text-[10px] sm:text-xs text-muted-foreground">Get notified when you earn commission</p>
             </div>
             <Switch checked={notifyEarning} onCheckedChange={setNotifyEarning} />
           </div>
@@ -152,21 +127,21 @@ export function SettingsForm({ userId, referralCode, userEmail }: SettingsFormPr
       </Card>
 
       <Card>
-        <CardContent className="p-6 space-y-4">
-          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">CHANGE PASSWORD</h3>
-          <div className="flex gap-3">
+        <CardContent className="p-4 sm:p-6 space-y-4">
+          <h3 className="text-xs sm:text-sm font-bold text-foreground uppercase tracking-wider">CHANGE PASSWORD</h3>
+          <div className="flex flex-col sm:flex-row gap-3">
             <Input
               type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               placeholder="New password (min 6 characters)"
-              className="bg-background border-border max-w-sm"
+              className="bg-background border-border sm:max-w-sm text-xs sm:text-sm"
             />
             <Button
               variant="outline"
               onClick={handleChangePassword}
               disabled={changingPassword || !newPassword}
-              className="font-bold text-xs uppercase"
+              className="font-bold text-[10px] sm:text-xs uppercase"
             >
               {changingPassword ? "UPDATING..." : "UPDATE"}
             </Button>
@@ -174,11 +149,11 @@ export function SettingsForm({ userId, referralCode, userEmail }: SettingsFormPr
         </CardContent>
       </Card>
 
-      <div className="flex items-center gap-3">
-        <Button onClick={handleSave} disabled={saving} className="gradient-cta border-0 text-foreground hover:opacity-90 font-bold rounded-full px-8">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        <Button onClick={handleSave} disabled={saving} className="gradient-cta border-0 text-foreground hover:opacity-90 font-bold rounded-full px-8 text-xs sm:text-sm">
           {saving ? "SAVING..." : "SAVE SETTINGS"}
         </Button>
-        <Button variant="outline" onClick={signOut} className="font-bold text-xs uppercase text-destructive hover:text-destructive rounded-full px-8">
+        <Button variant="outline" onClick={signOut} className="font-bold text-[10px] sm:text-xs uppercase text-destructive hover:text-destructive rounded-full px-8">
           SIGN OUT
         </Button>
       </div>

@@ -16,67 +16,31 @@ export default function Referrals() {
   const convertedReferrals = referrals.filter((r) => r.status === "converted").length;
   const pendingReferrals = referrals.filter((r) => r.status === "pending").length;
 
+  const stats = [
+    { label: "TOTAL", value: totalSignups },
+    { label: "ACTIVE", value: activeReferrals, cls: "text-success" },
+    { label: "CONVERTED", value: convertedReferrals, cls: "gradient-text" },
+    { label: "PENDING", value: pendingReferrals, cls: "text-warning" },
+    { label: "CONVERSION", value: `${conversionRate}%` },
+  ];
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div>
-        <h1 className="heading-massive text-3xl lg:text-4xl text-foreground">REFERRALS</h1>
-        <p className="text-sm text-muted-foreground mt-1">Track every referral, from click to conversion</p>
+        <h1 className="heading-massive text-2xl sm:text-3xl lg:text-4xl text-foreground">REFERRALS</h1>
+        <p className="text-xs sm:text-sm text-muted-foreground mt-1">Track every referral, from click to conversion</p>
       </div>
 
-      {/* Referral Stats */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-        <Card>
-          <CardContent className="p-5">
-            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">TOTAL REFERRALS</p>
-            <p className="text-2xl font-black text-foreground mt-1">{totalSignups}</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-5">
-            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">ACTIVE</p>
-            <p className="text-2xl font-black text-success mt-1">{activeReferrals}</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-5">
-            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">CONVERTED</p>
-            <p className="text-2xl font-black gradient-text mt-1">{convertedReferrals}</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-5">
-            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">PENDING</p>
-            <p className="text-2xl font-black text-warning mt-1">{pendingReferrals}</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-5">
-            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">CONVERSION</p>
-            <p className="text-2xl font-black text-foreground mt-1">{conversionRate}%</p>
-          </CardContent>
-        </Card>
+      <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+        {stats.map((s) => (
+          <Card key={s.label}>
+            <CardContent className="p-4 sm:p-5">
+              <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider">{s.label}</p>
+              <p className={`text-xl sm:text-2xl font-black mt-1 ${s.cls || "text-foreground"}`}>{s.value}</p>
+            </CardContent>
+          </Card>
+        ))}
       </div>
-
-      {/* Tips Card */}
-      <Card className="border-primary/20 bg-primary/5">
-        <CardContent className="p-5">
-          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">BOOST YOUR CONVERSIONS</h3>
-          <div className="grid gap-3 sm:grid-cols-3 mt-3">
-            <div>
-              <p className="text-xs font-bold text-foreground">Share on Social Media</p>
-              <p className="text-xs text-muted-foreground">Post about Megsy AI on Twitter, Instagram, and TikTok with your referral link.</p>
-            </div>
-            <div>
-              <p className="text-xs font-bold text-foreground">Create Content</p>
-              <p className="text-xs text-muted-foreground">Write reviews, tutorials, or comparison posts featuring Megsy AI.</p>
-            </div>
-            <div>
-              <p className="text-xs font-bold text-foreground">Email Your List</p>
-              <p className="text-xs text-muted-foreground">Send your subscribers a personal recommendation about Megsy AI.</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
 
       <ReferralsTable referrals={referrals} />
     </div>

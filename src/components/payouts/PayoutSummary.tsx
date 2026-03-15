@@ -14,12 +14,12 @@ export function PayoutSummary({ availableBalance, totalEarned, totalWithdrawn }:
   ];
 
   return (
-    <div className="grid gap-4 sm:grid-cols-3">
+    <div className="grid gap-3 sm:gap-4 grid-cols-3">
       {cards.map((card) => (
         <Card key={card.label}>
-          <CardContent className="p-6">
-            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{card.label}</p>
-            <p className={`text-3xl font-black mt-2 ${card.valueClass}`}>{card.value}</p>
+          <CardContent className="p-4 sm:p-6">
+            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider">{card.label}</p>
+            <p className={`text-lg sm:text-3xl font-black mt-1 sm:mt-2 ${card.valueClass}`}>{card.value}</p>
           </CardContent>
         </Card>
       ))}

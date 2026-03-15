@@ -18,9 +18,9 @@ export function EarningsChart({ earnings }: EarningsChartProps) {
 
   return (
     <Card>
-      <CardContent className="p-6">
-        <h3 className="text-sm font-bold text-foreground uppercase tracking-wider mb-4">EARNINGS (30 DAYS)</h3>
-        <div className="h-[280px]">
+      <CardContent className="p-4 sm:p-6">
+        <h3 className="text-xs sm:text-sm font-bold text-foreground uppercase tracking-wider mb-4">EARNINGS (30 DAYS)</h3>
+        <div className="h-[200px] sm:h-[280px]">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={chartData}>
               <defs>
@@ -30,14 +30,14 @@ export function EarningsChart({ earnings }: EarningsChartProps) {
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(0, 0%, 12%)" />
-              <XAxis dataKey="date" fontSize={11} tickLine={false} axisLine={false} tick={{ fill: "hsl(0, 0%, 45%)" }} />
-              <YAxis fontSize={11} tickLine={false} axisLine={false} tickFormatter={(v) => `$${v}`} tick={{ fill: "hsl(0, 0%, 45%)" }} />
+              <XAxis dataKey="date" fontSize={9} tickLine={false} axisLine={false} tick={{ fill: "hsl(0, 0%, 45%)" }} interval={6} />
+              <YAxis fontSize={10} tickLine={false} axisLine={false} tickFormatter={(v) => `$${v}`} tick={{ fill: "hsl(0, 0%, 45%)" }} width={35} />
               <Tooltip
                 contentStyle={{
                   background: "hsl(0, 0%, 6%)",
                   border: "1px solid hsl(0, 0%, 12%)",
                   borderRadius: "8px",
-                  fontSize: "12px",
+                  fontSize: "11px",
                   color: "hsl(0, 0%, 100%)",
                 }}
                 formatter={(value: number) => [`$${value.toFixed(2)}`, "Earnings"]}

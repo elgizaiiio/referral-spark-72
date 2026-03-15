@@ -9,13 +9,13 @@ export function LandingNavbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 lg:px-8">
-        <Link to="/landing" className="flex items-center gap-2.5">
-          <img src={logo} alt="Megsy" className="h-9 w-9 rounded-xl" />
-          <span className="text-lg font-bold text-foreground">Megsy AI</span>
+      <div className="mx-auto flex h-14 sm:h-16 max-w-7xl items-center justify-between px-4 lg:px-8">
+        <Link to="/landing" className="flex items-center gap-2">
+          <img src={logo} alt="Megsy" className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl" />
+          <span className="text-base sm:text-lg font-bold text-foreground">Megsy AI</span>
         </Link>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-6 lg:gap-8 md:flex">
           <a href="#how-it-works" className="text-sm text-muted-foreground transition-colors hover:text-foreground font-medium">How It Works</a>
           <a href="#features" className="text-sm text-muted-foreground transition-colors hover:text-foreground font-medium">Features</a>
           <a href="#calculator" className="text-sm text-muted-foreground transition-colors hover:text-foreground font-medium">Calculator</a>
@@ -31,7 +31,6 @@ export function LandingNavbar() {
           </Button>
         </div>
 
-        {/* Mobile toggle - text only, no icon */}
         <button className="md:hidden text-foreground font-bold text-sm uppercase" onClick={() => setOpen(!open)}>
           {open ? "CLOSE" : "MENU"}
         </button>
@@ -51,8 +50,8 @@ export function LandingNavbar() {
               <a href="#calculator" onClick={() => setOpen(false)} className="text-sm text-muted-foreground hover:text-foreground font-medium">Calculator</a>
               <a href="#faq" onClick={() => setOpen(false)} className="text-sm text-muted-foreground hover:text-foreground font-medium">FAQ</a>
               <div className="flex flex-col gap-2 pt-2">
-                <Button variant="outline" asChild><Link to="/login">Log in</Link></Button>
-                <Button className="gradient-cta border-0 text-foreground rounded-full font-bold" asChild><Link to="/login">Start Earning</Link></Button>
+                <Button variant="outline" className="w-full" asChild><Link to="/login" onClick={() => setOpen(false)}>Log in</Link></Button>
+                <Button className="gradient-cta border-0 text-foreground rounded-full font-bold w-full" asChild><Link to="/login" onClick={() => setOpen(false)}>Start Earning</Link></Button>
               </div>
             </div>
           </motion.div>

@@ -10,18 +10,18 @@ export function EarningsCalculator() {
   const yearly = monthly * 12;
 
   return (
-    <section id="calculator" className="py-24 lg:py-32">
+    <section id="calculator" className="py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-4xl px-4 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <h2 className="heading-massive text-4xl sm:text-5xl lg:text-7xl text-foreground">
+          <h2 className="heading-massive text-3xl sm:text-5xl lg:text-7xl text-foreground">
             YOUR <span className="gradient-text">POTENTIAL</span>
           </h2>
-          <p className="mt-4 text-muted-foreground text-lg">
+          <p className="mt-4 text-muted-foreground text-sm sm:text-lg">
             See how much you could earn with Megsy AI referrals
           </p>
         </motion.div>
@@ -30,11 +30,11 @@ export function EarningsCalculator() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-card rounded-2xl border border-border p-8 lg:p-12"
+          className="bg-card rounded-2xl border border-border p-6 sm:p-8 lg:p-12"
         >
-          <div className="text-center mb-8">
-            <p className="text-muted-foreground text-sm uppercase tracking-wider font-semibold mb-2">Referrals per month</p>
-            <p className="text-6xl font-black text-foreground">{referrals[0]}</p>
+          <div className="text-center mb-6 sm:mb-8">
+            <p className="text-muted-foreground text-xs sm:text-sm uppercase tracking-wider font-semibold mb-2">Referrals per month</p>
+            <p className="text-5xl sm:text-6xl font-black text-foreground">{referrals[0]}</p>
           </div>
 
           <Slider
@@ -43,21 +43,21 @@ export function EarningsCalculator() {
             max={200}
             min={1}
             step={1}
-            className="mb-12"
+            className="mb-8 sm:mb-12"
           />
 
-          <div className="grid gap-6 sm:grid-cols-2">
-            <div className="bg-accent/50 rounded-xl p-6 text-center">
-              <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold mb-2">Monthly Income</p>
-              <p className="text-4xl lg:text-5xl font-black gradient-text">${monthly.toLocaleString()}</p>
+          <div className="grid gap-4 sm:gap-6 grid-cols-2">
+            <div className="bg-accent/50 rounded-xl p-4 sm:p-6 text-center">
+              <p className="text-[10px] sm:text-sm text-muted-foreground uppercase tracking-wider font-semibold mb-2">Monthly Income</p>
+              <p className="text-2xl sm:text-4xl lg:text-5xl font-black gradient-text">${monthly.toLocaleString()}</p>
             </div>
-            <div className="bg-accent/50 rounded-xl p-6 text-center">
-              <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold mb-2">Yearly Income</p>
-              <p className="text-4xl lg:text-5xl font-black text-success">${yearly.toLocaleString()}</p>
+            <div className="bg-accent/50 rounded-xl p-4 sm:p-6 text-center">
+              <p className="text-[10px] sm:text-sm text-muted-foreground uppercase tracking-wider font-semibold mb-2">Yearly Income</p>
+              <p className="text-2xl sm:text-4xl lg:text-5xl font-black text-success">${yearly.toLocaleString()}</p>
             </div>
           </div>
 
-          <p className="mt-6 text-center text-xs text-muted-foreground">
+          <p className="mt-4 sm:mt-6 text-center text-[10px] sm:text-xs text-muted-foreground">
             Based on average subscription of ${avgSubscription}/mo at {commissionRate * 100}% commission
           </p>
         </motion.div>

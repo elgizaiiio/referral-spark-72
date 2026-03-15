@@ -16,27 +16,26 @@ export default function SettingsPage() {
   const memberSince = user.created_at ? new Date(user.created_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : "—";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div>
-        <h1 className="heading-massive text-3xl lg:text-4xl text-foreground">SETTINGS</h1>
-        <p className="text-sm text-muted-foreground mt-1">Manage your account and payment preferences</p>
+        <h1 className="heading-massive text-2xl sm:text-3xl lg:text-4xl text-foreground">SETTINGS</h1>
+        <p className="text-xs sm:text-sm text-muted-foreground mt-1">Manage your account preferences</p>
       </div>
 
-      {/* Account Summary */}
       <Card className="border-primary/20 bg-primary/5">
-        <CardContent className="p-5">
-          <div className="grid gap-4 sm:grid-cols-3">
+        <CardContent className="p-4 sm:p-5">
+          <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-3">
             <div>
-              <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">ACCOUNT EMAIL</p>
-              <p className="text-sm font-bold text-foreground mt-1">{user.email}</p>
+              <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider">EMAIL</p>
+              <p className="text-xs sm:text-sm font-bold text-foreground mt-1 truncate">{user.email}</p>
             </div>
             <div>
-              <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">REFERRAL CODE</p>
-              <p className="text-sm font-bold text-foreground font-mono mt-1">{referralCode}</p>
+              <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider">REFERRAL CODE</p>
+              <p className="text-xs sm:text-sm font-bold text-foreground font-mono mt-1">{referralCode}</p>
             </div>
             <div>
-              <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">MEMBER SINCE</p>
-              <p className="text-sm font-bold text-foreground mt-1">{memberSince}</p>
+              <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider">MEMBER SINCE</p>
+              <p className="text-xs sm:text-sm font-bold text-foreground mt-1">{memberSince}</p>
             </div>
           </div>
         </CardContent>
