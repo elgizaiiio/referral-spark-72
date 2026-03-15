@@ -11,8 +11,6 @@ import Referrals from "./pages/Referrals";
 import Analytics from "./pages/Analytics";
 import Payouts from "./pages/Payouts";
 import Leaderboard from "./pages/Leaderboard";
-import Resources from "./pages/Resources";
-import Support from "./pages/Support";
 import SettingsPage from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
@@ -33,8 +31,6 @@ const App = () => (
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/payouts" element={<Payouts />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/resources" element={<Resources />} />
-            <Route path="/support" element={<Support />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
           <Route path="*" element={<NotFound />} />

@@ -20,8 +20,6 @@ const navItems = [
   { title: "ANALYTICS", url: "/analytics" },
   { title: "PAYOUTS", url: "/payouts" },
   { title: "LEADERBOARD", url: "/leaderboard" },
-  { title: "RESOURCES", url: "/resources" },
-  { title: "SUPPORT", url: "/support" },
   { title: "SETTINGS", url: "/settings" },
 ];
 

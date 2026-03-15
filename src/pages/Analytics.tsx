@@ -14,7 +14,6 @@ export default function Analytics() {
 
   const isLoading = statsLoading || earningsLoading;
 
-  // Clicks per day (last 30 days)
   const clicksPerDay = useMemo(() => {
     return Array.from({ length: 30 }, (_, i) => {
       const date = startOfDay(subDays(new Date(), 29 - i));
@@ -26,7 +25,6 @@ export default function Analytics() {
     });
   }, [clicks]);
 
-  // Earnings per day (last 30 days)
   const earningsPerDay = useMemo(() => {
     return Array.from({ length: 30 }, (_, i) => {
       const date = startOfDay(subDays(new Date(), 29 - i));
@@ -38,7 +36,6 @@ export default function Analytics() {
     });
   }, [earnings]);
 
-  // Referrals by status
   const statusData = useMemo(() => {
     const active = referrals.filter((r) => r.status === "active").length;
     const converted = referrals.filter((r) => r.status === "converted").length;
@@ -50,7 +47,6 @@ export default function Analytics() {
     ].filter((d) => d.value > 0);
   }, [referrals]);
 
-  // Country breakdown from clicks
   const countryData = useMemo(() => {
     const map: Record<string, number> = {};
     clicks.forEach((c) => {
@@ -63,7 +59,6 @@ export default function Analytics() {
       .slice(0, 10);
   }, [clicks]);
 
-  // Referrer URL breakdown
   const sourceData = useMemo(() => {
     const map: Record<string, number> = {};
     clicks.forEach((c) => {
@@ -83,7 +78,6 @@ export default function Analytics() {
       .slice(0, 8);
   }, [clicks]);
 
-  // Weekly comparison
   const thisWeekClicks = useMemo(() => {
     const weekAgo = subDays(new Date(), 7);
     return clicks.filter((c) => new Date(c.clicked_at) >= weekAgo).length;
@@ -108,7 +102,7 @@ export default function Analytics() {
     return (
       <div className="space-y-6">
         <Skeleton className="h-10 w-48" />
-        <div className="grid gap-4 sm:grid-cols-4">
+        <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
           {[...Array(4)].map((_, i) => <Skeleton key={i} className="h-24" />)}
         </div>
         <Skeleton className="h-80" />
@@ -117,59 +111,52 @@ export default function Analytics() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div>
-        <h1 className="heading-massive text-3xl lg:text-4xl text-foreground">ANALYTICS</h1>
-        <p className="text-sm text-muted-foreground mt-1">Deep dive into your referral performance and traffic sources</p>
+        <h1 className="heading-massive text-2xl sm:text-3xl lg:text-4xl text-foreground">ANALYTICS</h1>
+        <p className="text-xs sm:text-sm text-muted-foreground mt-1">Deep dive into your referral performance</p>
       </div>
 
-      {/* Key Metrics */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
         <Card>
-          <CardContent className="p-5">
-            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">TOTAL CLICKS</p>
-            <p className="text-2xl font-black text-foreground mt-1">{totalClicks.toLocaleString()}</p>
-            <p className="text-xs text-muted-foreground mt-1">All time</p>
+          <CardContent className="p-4 sm:p-5">
+            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider">TOTAL CLICKS</p>
+            <p className="text-xl sm:text-2xl font-black text-foreground mt-1">{totalClicks.toLocaleString()}</p>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="p-5">
-            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">THIS WEEK</p>
-            <p className="text-2xl font-black gradient-text mt-1">{thisWeekClicks}</p>
-            <p className={`text-xs mt-1 ${Number(clicksChange) >= 0 ? "text-success" : "text-destructive"}`}>
+          <CardContent className="p-4 sm:p-5">
+            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider">THIS WEEK</p>
+            <p className="text-xl sm:text-2xl font-black gradient-text mt-1">{thisWeekClicks}</p>
+            <p className={`text-[10px] sm:text-xs mt-1 ${Number(clicksChange) >= 0 ? "text-success" : "text-destructive"}`}>
               {Number(clicksChange) >= 0 ? "+" : ""}{clicksChange}% vs last week
             </p>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="p-5">
-            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">CONVERSION RATE</p>
-            <p className="text-2xl font-black text-warning mt-1">{conversionRate}%</p>
-            <p className="text-xs text-muted-foreground mt-1">{totalSignups} of {totalClicks} clicks</p>
+          <CardContent className="p-4 sm:p-5">
+            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider">CONVERSION</p>
+            <p className="text-xl sm:text-2xl font-black text-warning mt-1">{conversionRate}%</p>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="p-5">
-            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">TOTAL EARNED</p>
-            <p className="text-2xl font-black text-success mt-1">${totalEarned.toFixed(2)}</p>
-            <p className="text-xs text-muted-foreground mt-1">20% commission</p>
+          <CardContent className="p-4 sm:p-5">
+            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider">TOTAL EARNED</p>
+            <p className="text-xl sm:text-2xl font-black text-success mt-1">${totalEarned.toFixed(2)}</p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Clicks Over Time */}
       <Card>
-        <CardContent className="p-6">
-          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider mb-4">CLICKS OVER TIME (30 DAYS)</h3>
-          <div className="h-[300px]">
+        <CardContent className="p-4 sm:p-6">
+          <h3 className="text-xs sm:text-sm font-bold text-foreground uppercase tracking-wider mb-4">CLICKS (30 DAYS)</h3>
+          <div className="h-[200px] sm:h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={clicksPerDay}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(0, 0%, 12%)" />
-                <XAxis dataKey="date" fontSize={10} tickLine={false} axisLine={false} tick={{ fill: "hsl(0, 0%, 45%)" }} interval={4} />
-                <YAxis fontSize={11} tickLine={false} axisLine={false} tick={{ fill: "hsl(0, 0%, 45%)" }} />
-                <Tooltip
-                  contentStyle={{ background: "hsl(0, 0%, 6%)", border: "1px solid hsl(0, 0%, 12%)", borderRadius: "8px", fontSize: "12px", color: "hsl(0, 0%, 100%)" }}
-                />
+                <XAxis dataKey="date" fontSize={9} tickLine={false} axisLine={false} tick={{ fill: "hsl(0, 0%, 45%)" }} interval={6} />
+                <YAxis fontSize={10} tickLine={false} axisLine={false} tick={{ fill: "hsl(0, 0%, 45%)" }} width={30} />
+                <Tooltip contentStyle={{ background: "hsl(0, 0%, 6%)", border: "1px solid hsl(0, 0%, 12%)", borderRadius: "8px", fontSize: "11px", color: "hsl(0, 0%, 100%)" }} />
                 <Bar dataKey="clicks" fill="hsl(271, 91%, 65%)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -177,11 +164,10 @@ export default function Analytics() {
         </CardContent>
       </Card>
 
-      {/* Earnings Over Time */}
       <Card>
-        <CardContent className="p-6">
-          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider mb-4">EARNINGS OVER TIME (30 DAYS)</h3>
-          <div className="h-[300px]">
+        <CardContent className="p-4 sm:p-6">
+          <h3 className="text-xs sm:text-sm font-bold text-foreground uppercase tracking-wider mb-4">EARNINGS (30 DAYS)</h3>
+          <div className="h-[200px] sm:h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={earningsPerDay}>
                 <defs>
@@ -191,12 +177,9 @@ export default function Analytics() {
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(0, 0%, 12%)" />
-                <XAxis dataKey="date" fontSize={10} tickLine={false} axisLine={false} tick={{ fill: "hsl(0, 0%, 45%)" }} interval={4} />
-                <YAxis fontSize={11} tickLine={false} axisLine={false} tickFormatter={(v) => `$${v}`} tick={{ fill: "hsl(0, 0%, 45%)" }} />
-                <Tooltip
-                  contentStyle={{ background: "hsl(0, 0%, 6%)", border: "1px solid hsl(0, 0%, 12%)", borderRadius: "8px", fontSize: "12px", color: "hsl(0, 0%, 100%)" }}
-                  formatter={(value: number) => [`$${value.toFixed(2)}`, "Earnings"]}
-                />
+                <XAxis dataKey="date" fontSize={9} tickLine={false} axisLine={false} tick={{ fill: "hsl(0, 0%, 45%)" }} interval={6} />
+                <YAxis fontSize={10} tickLine={false} axisLine={false} tickFormatter={(v) => `$${v}`} tick={{ fill: "hsl(0, 0%, 45%)" }} width={40} />
+                <Tooltip contentStyle={{ background: "hsl(0, 0%, 6%)", border: "1px solid hsl(0, 0%, 12%)", borderRadius: "8px", fontSize: "11px", color: "hsl(0, 0%, 100%)" }} formatter={(value: number) => [`$${value.toFixed(2)}`, "Earnings"]} />
                 <Area type="monotone" dataKey="earnings" stroke="hsl(160, 84%, 39%)" strokeWidth={2} fill="url(#analyticsEarningsGrad)" />
               </AreaChart>
             </ResponsiveContainer>
@@ -204,23 +187,22 @@ export default function Analytics() {
         </CardContent>
       </Card>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        {/* Referral Status Breakdown */}
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
         <Card>
-          <CardContent className="p-6">
-            <h3 className="text-sm font-bold text-foreground uppercase tracking-wider mb-4">REFERRAL STATUS</h3>
+          <CardContent className="p-4 sm:p-6">
+            <h3 className="text-xs sm:text-sm font-bold text-foreground uppercase tracking-wider mb-4">REFERRAL STATUS</h3>
             {statusData.length === 0 ? (
               <p className="text-sm text-muted-foreground py-8 text-center">No referrals yet</p>
             ) : (
-              <div className="h-[250px]">
+              <div className="h-[200px] sm:h-[250px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
-                    <Pie data={statusData} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={5} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>
+                    <Pie data={statusData} cx="50%" cy="50%" innerRadius={40} outerRadius={70} paddingAngle={5} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} fontSize={11}>
                       {statusData.map((_, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Pie>
-                    <Tooltip contentStyle={{ background: "hsl(0, 0%, 6%)", border: "1px solid hsl(0, 0%, 12%)", borderRadius: "8px", fontSize: "12px", color: "hsl(0, 0%, 100%)" }} />
+                    <Tooltip contentStyle={{ background: "hsl(0, 0%, 6%)", border: "1px solid hsl(0, 0%, 12%)", borderRadius: "8px", fontSize: "11px", color: "hsl(0, 0%, 100%)" }} />
                   </PieChart>
                 </ResponsiveContainer>
               </div>
@@ -228,28 +210,24 @@ export default function Analytics() {
           </CardContent>
         </Card>
 
-        {/* Top Countries */}
         <Card>
-          <CardContent className="p-6">
-            <h3 className="text-sm font-bold text-foreground uppercase tracking-wider mb-4">TOP COUNTRIES</h3>
+          <CardContent className="p-4 sm:p-6">
+            <h3 className="text-xs sm:text-sm font-bold text-foreground uppercase tracking-wider mb-4">TOP COUNTRIES</h3>
             {countryData.length === 0 ? (
               <p className="text-sm text-muted-foreground py-8 text-center">No click data yet</p>
             ) : (
               <div className="space-y-3">
                 {countryData.map((c, i) => (
                   <div key={c.name} className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <span className="text-xs font-bold text-muted-foreground w-5">{i + 1}</span>
-                      <span className="text-sm font-bold text-foreground">{c.name}</span>
+                    <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                      <span className="text-[10px] sm:text-xs font-bold text-muted-foreground w-4 sm:w-5">{i + 1}</span>
+                      <span className="text-xs sm:text-sm font-bold text-foreground truncate">{c.name}</span>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-24 h-2 rounded-full bg-accent overflow-hidden">
-                        <div
-                          className="h-full rounded-full bg-primary"
-                          style={{ width: `${(c.value / (countryData[0]?.value || 1)) * 100}%` }}
-                        />
+                    <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+                      <div className="w-16 sm:w-24 h-2 rounded-full bg-accent overflow-hidden">
+                        <div className="h-full rounded-full bg-primary" style={{ width: `${(c.value / (countryData[0]?.value || 1)) * 100}%` }} />
                       </div>
-                      <span className="text-xs font-bold text-muted-foreground w-10 text-right">{c.value}</span>
+                      <span className="text-[10px] sm:text-xs font-bold text-muted-foreground w-8 sm:w-10 text-right">{c.value}</span>
                     </div>
                   </div>
                 ))}
@@ -259,44 +237,22 @@ export default function Analytics() {
         </Card>
       </div>
 
-      {/* Traffic Sources */}
       <Card>
-        <CardContent className="p-6">
-          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider mb-4">TRAFFIC SOURCES</h3>
+        <CardContent className="p-4 sm:p-6">
+          <h3 className="text-xs sm:text-sm font-bold text-foreground uppercase tracking-wider mb-4">TRAFFIC SOURCES</h3>
           {sourceData.length === 0 ? (
             <p className="text-sm text-muted-foreground py-8 text-center">No traffic source data yet</p>
           ) : (
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
               {sourceData.map((s) => (
-                <div key={s.name} className="bg-background rounded-xl border border-border p-4">
-                  <p className="text-xs text-muted-foreground font-bold uppercase truncate">{s.name}</p>
-                  <p className="text-xl font-black text-foreground mt-1">{s.value}</p>
-                  <p className="text-xs text-muted-foreground">clicks</p>
+                <div key={s.name} className="bg-background rounded-xl border border-border p-3 sm:p-4">
+                  <p className="text-[10px] sm:text-xs text-muted-foreground font-bold uppercase truncate">{s.name}</p>
+                  <p className="text-lg sm:text-xl font-black text-foreground mt-1">{s.value}</p>
+                  <p className="text-[10px] sm:text-xs text-muted-foreground">clicks</p>
                 </div>
               ))}
             </div>
           )}
-        </CardContent>
-      </Card>
-
-      {/* Performance Tips */}
-      <Card className="border-primary/20 bg-primary/5">
-        <CardContent className="p-5">
-          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider mb-3">PERFORMANCE INSIGHTS</h3>
-          <div className="grid gap-3 sm:grid-cols-3">
-            <div>
-              <p className="text-xs font-bold text-foreground">Optimize Your CTR</p>
-              <p className="text-xs text-muted-foreground">Use compelling calls-to-action and showcase specific features like image generation or video creation.</p>
-            </div>
-            <div>
-              <p className="text-xs font-bold text-foreground">Best Posting Times</p>
-              <p className="text-xs text-muted-foreground">Analyze your click patterns to identify when your audience is most active and schedule posts accordingly.</p>
-            </div>
-            <div>
-              <p className="text-xs font-bold text-foreground">Diversify Traffic</p>
-              <p className="text-xs text-muted-foreground">Don't rely on one platform. Spread across social media, email, blogs, and communities for stable traffic.</p>
-            </div>
-          </div>
         </CardContent>
       </Card>
     </div>

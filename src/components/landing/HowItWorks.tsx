@@ -25,14 +25,14 @@ const steps = [
   {
     number: "04",
     title: "PEOPLE SIGN UP",
-    description: "When someone uses your link and subscribes to Megsy AI, you earn commission instantly.",
+    description: "When someone uses your link and subscribes to Megsy AI, you earn commission.",
     borderColor: "border-t-[hsl(140,50%,35%)]",
     numColor: "text-[hsl(140,50%,35%)]",
   },
   {
     number: "05",
     title: "GET PAID",
-    description: "Withdraw your earnings via PayPal, bank transfer, or crypto. No minimum threshold.",
+    description: "Withdraw your earnings anytime. No minimum threshold. Fast processing.",
     borderColor: "border-t-[hsl(38,70%,50%)]",
     numColor: "text-[hsl(38,70%,50%)]",
   },
@@ -40,24 +40,24 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-24 lg:py-32">
+    <section id="how-it-works" className="py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="heading-massive text-4xl sm:text-5xl lg:text-7xl text-foreground">
+          <h2 className="heading-massive text-3xl sm:text-5xl lg:text-7xl text-foreground">
             GET STARTED{" "}
             <span className="gradient-text">WITH MEGSY</span>
           </h2>
-          <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
-            Five simple steps to start earning real money
+          <p className="mt-4 text-muted-foreground text-sm sm:text-lg max-w-2xl mx-auto">
+            Five simple steps to start earning
           </p>
         </motion.div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
@@ -65,11 +65,11 @@ export function HowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`bg-card rounded-xl border border-border ${step.borderColor} border-t-2 p-6 flex flex-col`}
+              className={`bg-card rounded-xl border border-border ${step.borderColor} border-t-2 p-4 sm:p-6 flex flex-col`}
             >
-              <span className={`text-4xl font-black ${step.numColor}`}>{step.number}</span>
-              <h3 className="mt-4 text-base font-bold text-foreground uppercase tracking-wide">{step.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{step.description}</p>
+              <span className={`text-3xl sm:text-4xl font-black ${step.numColor}`}>{step.number}</span>
+              <h3 className="mt-3 sm:mt-4 text-xs sm:text-base font-bold text-foreground uppercase tracking-wide">{step.title}</h3>
+              <p className="mt-2 text-[10px] sm:text-sm text-muted-foreground leading-relaxed">{step.description}</p>
             </motion.div>
           ))}
         </div>

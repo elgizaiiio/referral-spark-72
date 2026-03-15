@@ -10,15 +10,14 @@ import { EarningExamples } from "@/components/landing/EarningExamples";
 import { FeaturesGrid } from "@/components/landing/FeaturesGrid";
 import { BenefitsGrid } from "@/components/landing/BenefitsGrid";
 import { ToolsPreview } from "@/components/landing/ToolsPreview";
+import { DashboardPreview } from "@/components/landing/DashboardPreview";
 import { SocialTools } from "@/components/landing/SocialTools";
 import { MarketingStrategies } from "@/components/landing/MarketingStrategies";
-import { DashboardPreview } from "@/components/landing/DashboardPreview";
 import { ComparisonSection } from "@/components/landing/ComparisonSection";
 import { WhyMegsy } from "@/components/landing/WhyMegsy";
 import { TrustSection } from "@/components/landing/TrustSection";
 import { SuccessStories } from "@/components/landing/SuccessStories";
 import { GlobalReach } from "@/components/landing/GlobalReach";
-import { PaymentMethods } from "@/components/landing/PaymentMethods";
 import { PartnerSupport } from "@/components/landing/PartnerSupport";
 import { CommissionInfo } from "@/components/landing/CommissionInfo";
 import { LegalSection } from "@/components/landing/LegalSection";
@@ -49,7 +48,6 @@ export default function Landing() {
       <TrustSection />
       <SuccessStories />
       <GlobalReach />
-      <PaymentMethods />
       <PartnerSupport />
       <CommissionInfo />
       <LegalSection />
