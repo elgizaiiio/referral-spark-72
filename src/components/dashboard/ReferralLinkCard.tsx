@@ -19,7 +19,7 @@ export function ReferralLinkCard({ referralCode }: ReferralLinkCardProps) {
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
 
-  const referralUrl = `https://megsyai.com?ref=${referralCode}`;
+  const referralUrl = `https://ltgampdtawuefwwayncx.supabase.co/functions/v1/track-referral-click?ref=${referralCode}`;
   const shareTitle = "Join Megsy AI with my referral link and get started!";
 
   const handleCopy = async () => {
