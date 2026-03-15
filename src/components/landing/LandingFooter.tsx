@@ -45,7 +45,7 @@ export function LandingFooter() {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-border pt-6">
-          <p className="text-[10px] sm:text-xs text-muted-foreground">© 2025 Megsy AI. All rights reserved.</p>
+          <p className="text-[10px] sm:text-xs text-muted-foreground">© 2026 Megsy AI. All rights reserved.</p>
           <div className="flex gap-4">
             <a href="https://megsyai.com/terms" target="_blank" rel="noopener noreferrer" className="text-[10px] sm:text-xs text-muted-foreground hover:text-foreground transition-colors">Terms</a>
             <a href="https://megsyai.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[10px] sm:text-xs text-muted-foreground hover:text-foreground transition-colors">Privacy</a>
