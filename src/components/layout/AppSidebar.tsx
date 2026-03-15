@@ -17,8 +17,11 @@ import logo from "@/assets/logo.png";
 const navItems = [
   { title: "OVERVIEW", url: "/" },
   { title: "REFERRALS", url: "/referrals" },
+  { title: "ANALYTICS", url: "/analytics" },
   { title: "PAYOUTS", url: "/payouts" },
+  { title: "LEADERBOARD", url: "/leaderboard" },
   { title: "RESOURCES", url: "/resources" },
+  { title: "SUPPORT", url: "/support" },
   { title: "SETTINGS", url: "/settings" },
 ];
 
