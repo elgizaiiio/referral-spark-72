@@ -39,37 +39,12 @@ const resources = [
   },
 ];
 
-const tiers = [
-  { name: "BRONZE", range: "0-10 referrals", rate: "20%", color: "text-[hsl(30,60%,50%)]" },
-  { name: "SILVER", range: "11-50 referrals", rate: "22%", color: "text-muted-foreground" },
-  { name: "GOLD", range: "51-100 referrals", rate: "25%", color: "text-warning" },
-  { name: "PLATINUM", range: "100+ referrals", rate: "30%", color: "gradient-text" },
-];
-
 export default function Resources() {
   return (
     <div className="space-y-8">
       <h1 className="heading-massive text-3xl lg:text-4xl text-foreground">RESOURCES</h1>
       <p className="text-sm text-muted-foreground">Everything you need to maximize your earnings</p>
 
-      {/* Performance Tiers */}
-      <div>
-        <h2 className="text-sm font-bold text-foreground uppercase tracking-wider mb-4">PERFORMANCE TIERS</h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {tiers.map((tier) => (
-            <Card key={tier.name}>
-              <CardContent className="p-6 text-center">
-                <p className={`text-2xl font-black ${tier.color}`}>{tier.name}</p>
-                <p className="text-xs text-muted-foreground mt-1">{tier.range}</p>
-                <p className="text-3xl font-black text-foreground mt-3">{tier.rate}</p>
-                <p className="text-xs text-muted-foreground">commission</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-
-      {/* Resource sections */}
       {resources.map((section, si) => (
         <motion.div
           key={section.category}
