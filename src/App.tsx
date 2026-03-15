@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import Login from "./pages/Login";
+import Landing from "./pages/Landing";
 import Overview from "./pages/Overview";
 import Referrals from "./pages/Referrals";
 import Payouts from "./pages/Payouts";
@@ -20,6 +21,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          <Route path="/landing" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route element={<DashboardLayout />}>
             <Route path="/" element={<Overview />} />

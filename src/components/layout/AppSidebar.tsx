@@ -1,6 +1,5 @@
 import { LayoutDashboard, Users, Wallet, Settings, LogOut } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import {
   Sidebar,
@@ -26,7 +25,6 @@ const navItems = [
 export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
-  const location = useLocation();
   const { signOut } = useAuth();
 
   return (
@@ -36,7 +34,7 @@ export function AppSidebar() {
           <SidebarGroupLabel className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             {!collapsed && (
               <div className="flex items-center gap-2 px-1 py-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-cta font-bold text-foreground text-sm">
                   M
                 </div>
                 <span className="text-base font-bold text-foreground">Megsy Referrals</span>
