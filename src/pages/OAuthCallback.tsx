@@ -71,7 +71,7 @@ export default function OAuthCallback() {
       setStatus("Login successful!");
       navigate("/", { replace: true });
     } catch (err: any) {
-      setError(err.message || "حدث خطأ غير متوقع");
+      setError(err.message || "An unexpected error occurred");
     }
   };
 
