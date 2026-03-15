@@ -64,7 +64,7 @@ export default function OAuthCallback() {
       });
 
       if (verifyError) {
-        setError("فشل في إنشاء الجلسة: " + verifyError.message);
+        setError("Failed to create session: " + verifyError.message);
         return;
       }
 
