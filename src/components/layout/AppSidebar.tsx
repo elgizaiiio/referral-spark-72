@@ -24,9 +24,15 @@ const navItems = [
 ];
 
 export function AppSidebar() {
-  const { state } = useSidebar();
+  const { state, isMobile, setOpenMobile } = useSidebar();
   const collapsed = state === "collapsed";
   const { signOut } = useAuth();
+
+  const handleNavClick = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
+  };
 
   return (
     <Sidebar collapsible="icon">
@@ -48,6 +54,7 @@ export function AppSidebar() {
                       end={item.url === "/"}
                       className="flex items-center rounded-lg px-3 py-2.5 text-xs font-bold text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground uppercase tracking-wider"
                       activeClassName="bg-primary/10 text-primary"
+                      onClick={handleNavClick}
                     >
                       {!collapsed && <span>{item.title}</span>}
                     </NavLink>
