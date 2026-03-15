@@ -51,7 +51,7 @@ export default function OAuthCallback() {
       );
 
       if (fnError || !data?.token_hash) {
-        setError(data?.error || fnError?.message || "فشل في تسجيل الدخول");
+        setError(data?.error || fnError?.message || "Login failed");
         return;
       }
 
