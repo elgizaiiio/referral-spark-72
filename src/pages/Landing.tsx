@@ -38,8 +38,6 @@ export default function Landing() {
       <PricingSection />
       <EarningsCalculator />
       <EarningExamples />
-      <CommissionStructure />
-      <MilestoneBonuses />
       <FeaturesGrid />
       <BenefitsGrid />
       <WhyMegsy />

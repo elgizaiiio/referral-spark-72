@@ -12,6 +12,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
 
   if (loading) {
     return (
@@ -27,8 +28,19 @@ export default function Login() {
     e.preventDefault();
     setError("");
     setSubmitting(true);
-    const { error } = await signIn(email, password);
-    if (error) setError(error.message);
+
+    if (isSignUp) {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { emailRedirectTo: window.location.origin },
+      });
+      if (error) setError(error.message);
+      else setError("Check your email for a confirmation link!");
+    } else {
+      const { error } = await signIn(email, password);
+      if (error) setError(error.message);
+    }
     setSubmitting(false);
   };
 
@@ -55,8 +67,12 @@ export default function Login() {
       <div className="relative w-full max-w-md bg-card border border-border rounded-2xl p-8 shadow-2xl">
         <div className="text-center mb-8">
           <img src={logo} alt="Megsy" className="h-14 w-14 rounded-2xl mx-auto mb-4" />
-          <h1 className="text-2xl font-black text-foreground uppercase">PARTNER LOGIN</h1>
-          <p className="text-sm text-muted-foreground mt-1">Sign in with your Megsy AI account</p>
+          <h1 className="text-2xl font-black text-foreground uppercase">
+            {isSignUp ? "CREATE ACCOUNT" : "PARTNER LOGIN"}
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            {isSignUp ? "Join the Megsy AI partner program" : "Sign in to your partner dashboard"}
+          </p>
         </div>
 
         {/* OAuth Buttons */}
@@ -110,26 +126,26 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
+              minLength={6}
               className="bg-background border-border h-12"
             />
           </div>
           {error && (
-            <p className="text-sm text-destructive">{error}</p>
+            <p className={`text-sm ${error.includes("Check your email") ? "text-success" : "text-destructive"}`}>{error}</p>
           )}
           <Button type="submit" className="w-full gradient-cta border-0 text-foreground hover:opacity-90 h-12 font-bold text-base rounded-full" disabled={submitting}>
-            {submitting ? "SIGNING IN..." : "SIGN IN"}
+            {submitting ? (isSignUp ? "CREATING..." : "SIGNING IN...") : (isSignUp ? "CREATE ACCOUNT" : "SIGN IN")}
           </Button>
         </form>
+
         <p className="mt-6 text-center text-sm text-muted-foreground">
-          Don't have an account?{" "}
-          <a
-            href="https://megsyai.com"
-            target="_blank"
-            rel="noopener noreferrer"
+          {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
+          <button
+            onClick={() => { setIsSignUp(!isSignUp); setError(""); }}
             className="font-bold text-primary hover:underline"
           >
-            Sign up on Megsy AI
-          </a>
+            {isSignUp ? "Sign In" : "Sign Up"}
+          </button>
         </p>
       </div>
     </div>
