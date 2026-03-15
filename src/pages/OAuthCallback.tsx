@@ -17,7 +17,7 @@ export default function OAuthCallback() {
     const errorParam = searchParams.get("error");
 
     if (errorParam) {
-      setError("تم رفض الطلب من قبل المستخدم");
+      setError("Request was denied by the user");
       return;
     }
 
