@@ -11,7 +11,7 @@ export function LandingNavbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-14 sm:h-16 max-w-7xl items-center justify-between px-4 lg:px-8">
         <Link to="/landing" className="flex items-center gap-2">
-          <img src={logo} alt="Megsy" className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl" />
+          <img alt="Megsy" className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl" src="/lovable-uploads/0b4443af-e27e-4d40-bd4d-10766af0d141.png" />
           <span className="text-base sm:text-lg font-bold text-foreground">Megsy AI</span>
         </Link>
 
@@ -37,13 +37,13 @@ export function LandingNavbar() {
       </div>
 
       <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="border-t border-border bg-background md:hidden"
-          >
+        {open &&
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          className="border-t border-border bg-background md:hidden">
+          
             <div className="flex flex-col gap-4 px-4 py-6">
               <a href="#how-it-works" onClick={() => setOpen(false)} className="text-sm text-muted-foreground hover:text-foreground font-medium">How It Works</a>
               <a href="#features" onClick={() => setOpen(false)} className="text-sm text-muted-foreground hover:text-foreground font-medium">Features</a>
@@ -55,8 +55,8 @@ export function LandingNavbar() {
               </div>
             </div>
           </motion.div>
-        )}
+        }
       </AnimatePresence>
-    </nav>
-  );
+    </nav>);
+
 }
