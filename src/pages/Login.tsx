@@ -54,7 +54,7 @@ export default function Login() {
             PARTNER LOGIN
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground mt-2">
-            سجّل دخولك عبر حساب Megsy الخاص بك
+            Sign in with your Megsy account
           </p>
         </div>
 
