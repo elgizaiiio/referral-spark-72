@@ -95,7 +95,7 @@ export default function OAuthCallback() {
               onClick={() => navigate("/login", { replace: true })}
               className="text-sm text-primary font-bold hover:underline"
             >
-              العودة لتسجيل الدخول
+              Back to Login
             </button>
           </div>
         ) : (
