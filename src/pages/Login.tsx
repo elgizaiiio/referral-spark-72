@@ -89,13 +89,6 @@ export default function Login() {
       {/* Right panel / Main login */}
       <div className="flex w-full lg:w-1/2 items-center justify-center p-6 sm:p-8 relative z-10">
         <div className="w-full max-w-sm space-y-10">
-          {/* Back link */}
-          <Link
-            to="/landing"
-            className="inline-block text-[10px] sm:text-xs text-muted-foreground hover:text-foreground font-bold uppercase tracking-widest transition-colors"
-          >
-            ← BACK
-          </Link>
 
           {/* Logo & heading */}
           <div className="space-y-6">
