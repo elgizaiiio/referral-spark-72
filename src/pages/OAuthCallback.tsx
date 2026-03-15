@@ -22,7 +22,7 @@ export default function OAuthCallback() {
     }
 
     if (!code) {
-      setError("لم يتم العثور على كود التفويض");
+      setError("Authorization code not found");
       return;
     }
 
