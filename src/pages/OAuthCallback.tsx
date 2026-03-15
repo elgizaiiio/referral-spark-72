@@ -9,7 +9,7 @@ export default function OAuthCallback() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  const [status, setStatus] = useState("جاري تسجيل الدخول...");
+  const [status, setStatus] = useState("Signing in...");
 
   useEffect(() => {
     const code = searchParams.get("code");
