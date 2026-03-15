@@ -23,6 +23,7 @@ export function WithdrawForm({ userId, availableBalance, onSuccess }: WithdrawFo
     const numAmount = parseFloat(amount);
     if (isNaN(numAmount) || numAmount <= 0) { toast.error("Enter a valid amount"); return; }
     if (numAmount > availableBalance) { toast.error("Insufficient balance"); return; }
+    if (!details.trim()) { toast.error("Please enter your payment details"); return; }
 
     setSubmitting(true);
     const { error } = await supabase.from("withdrawal_requests").insert({
@@ -33,6 +34,13 @@ export function WithdrawForm({ userId, availableBalance, onSuccess }: WithdrawFo
     setSubmitting(false);
   };
 
+  const placeholderMap: Record<string, string> = {
+    paypal: "PayPal email address",
+    bank_transfer: "Bank name, IBAN, SWIFT code",
+    crypto: "USDT wallet address (TRC-20 or ERC-20)",
+    wise: "Wise email or account number",
+  };
+
   return (
     <Card>
       <CardContent className="p-6">
@@ -41,27 +49,34 @@ export function WithdrawForm({ userId, availableBalance, onSuccess }: WithdrawFo
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="space-y-2">
               <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Amount ($)</label>
-              <Input type="number" step="0.01" min="1" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="0.00" className="bg-background border-border" />
+              <Input type="number" step="0.01" min="0.01" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="0.00" className="bg-background border-border" />
+              <p className="text-xs text-muted-foreground">Available: ${availableBalance.toFixed(2)}</p>
             </div>
             <div className="space-y-2">
               <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Method</label>
               <Select value={method} onValueChange={setMethod}>
                 <SelectTrigger className="bg-background border-border"><SelectValue /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="paypal">PayPal</SelectItem>
-                  <SelectItem value="bank_transfer">Bank Transfer</SelectItem>
-                  <SelectItem value="crypto">Crypto</SelectItem>
+                  <SelectItem value="paypal">PayPal (1-2 hours)</SelectItem>
+                  <SelectItem value="bank_transfer">Bank Transfer (2-3 days)</SelectItem>
+                  <SelectItem value="crypto">Crypto USDT (Instant)</SelectItem>
+                  <SelectItem value="wise">Wise (1-2 days)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-2">
               <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Payment Details</label>
-              <Input value={details} onChange={(e) => setDetails(e.target.value)} placeholder="PayPal email or wallet" className="bg-background border-border" />
+              <Input value={details} onChange={(e) => setDetails(e.target.value)} placeholder={placeholderMap[method] || "Payment details"} className="bg-background border-border" />
             </div>
           </div>
-          <Button type="submit" className="gradient-cta border-0 text-foreground hover:opacity-90 font-bold rounded-full px-8" disabled={submitting}>
-            {submitting ? "SUBMITTING..." : "REQUEST WITHDRAWAL"}
-          </Button>
+          <div className="flex items-center gap-4">
+            <Button type="submit" className="gradient-cta border-0 text-foreground hover:opacity-90 font-bold rounded-full px-8" disabled={submitting || availableBalance <= 0}>
+              {submitting ? "SUBMITTING..." : "REQUEST WITHDRAWAL"}
+            </Button>
+            {availableBalance <= 0 && (
+              <p className="text-xs text-muted-foreground">No balance available to withdraw</p>
+            )}
+          </div>
         </form>
       </CardContent>
     </Card>

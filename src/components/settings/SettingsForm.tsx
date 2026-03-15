@@ -6,6 +6,7 @@ import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useAuth } from "@/hooks/useAuth";
 
 interface SettingsFormProps {
   userId: string;
@@ -14,11 +15,14 @@ interface SettingsFormProps {
 }
 
 export function SettingsForm({ userId, referralCode, userEmail }: SettingsFormProps) {
+  const { signOut } = useAuth();
   const [paymentMethod, setPaymentMethod] = useState("paypal");
   const [paymentDetails, setPaymentDetails] = useState("");
   const [notifySignup, setNotifySignup] = useState(true);
   const [notifyEarning, setNotifyEarning] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [changingPassword, setChangingPassword] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
 
   useEffect(() => {
     const load = async () => {
@@ -54,6 +58,28 @@ export function SettingsForm({ userId, referralCode, userEmail }: SettingsFormPr
     setSaving(false);
   };
 
+  const handleChangePassword = async () => {
+    if (newPassword.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+    setChangingPassword(true);
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    if (error) toast.error(error.message);
+    else {
+      toast.success("Password updated successfully!");
+      setNewPassword("");
+    }
+    setChangingPassword(false);
+  };
+
+  const placeholderMap: Record<string, string> = {
+    paypal: "PayPal email address",
+    bank_transfer: "Bank name, IBAN, SWIFT code",
+    crypto: "USDT wallet address (TRC-20 or ERC-20)",
+    wise: "Wise email or account number",
+  };
+
   return (
     <div className="space-y-6">
       <Card>
@@ -69,6 +95,10 @@ export function SettingsForm({ userId, referralCode, userEmail }: SettingsFormPr
               <Input value={referralCode} disabled className="bg-muted border-border font-mono" />
             </div>
           </div>
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Referral Link</label>
+            <Input value={`https://megsyai.com?ref=${referralCode}`} disabled className="bg-muted border-border font-mono text-sm" />
+          </div>
         </CardContent>
       </Card>
 
@@ -81,15 +111,21 @@ export function SettingsForm({ userId, referralCode, userEmail }: SettingsFormPr
               <Select value={paymentMethod} onValueChange={setPaymentMethod}>
                 <SelectTrigger className="bg-background border-border"><SelectValue /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="paypal">PayPal</SelectItem>
-                  <SelectItem value="bank_transfer">Bank Transfer</SelectItem>
-                  <SelectItem value="crypto">Crypto</SelectItem>
+                  <SelectItem value="paypal">PayPal (1-2 hours)</SelectItem>
+                  <SelectItem value="bank_transfer">Bank Transfer (2-3 days)</SelectItem>
+                  <SelectItem value="crypto">Crypto USDT (Instant)</SelectItem>
+                  <SelectItem value="wise">Wise (1-2 days)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-2">
               <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Payment Details</label>
-              <Input value={paymentDetails} onChange={(e) => setPaymentDetails(e.target.value)} placeholder="PayPal email, bank IBAN, or wallet" className="bg-background border-border" />
+              <Input
+                value={paymentDetails}
+                onChange={(e) => setPaymentDetails(e.target.value)}
+                placeholder={placeholderMap[paymentMethod] || "Payment details"}
+                className="bg-background border-border"
+              />
             </div>
           </div>
         </CardContent>
@@ -115,9 +151,37 @@ export function SettingsForm({ userId, referralCode, userEmail }: SettingsFormPr
         </CardContent>
       </Card>
 
-      <Button onClick={handleSave} disabled={saving} className="gradient-cta border-0 text-foreground hover:opacity-90 font-bold rounded-full px-8">
-        {saving ? "SAVING..." : "SAVE SETTINGS"}
-      </Button>
+      <Card>
+        <CardContent className="p-6 space-y-4">
+          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">CHANGE PASSWORD</h3>
+          <div className="flex gap-3">
+            <Input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder="New password (min 6 characters)"
+              className="bg-background border-border max-w-sm"
+            />
+            <Button
+              variant="outline"
+              onClick={handleChangePassword}
+              disabled={changingPassword || !newPassword}
+              className="font-bold text-xs uppercase"
+            >
+              {changingPassword ? "UPDATING..." : "UPDATE"}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className="flex items-center gap-3">
+        <Button onClick={handleSave} disabled={saving} className="gradient-cta border-0 text-foreground hover:opacity-90 font-bold rounded-full px-8">
+          {saving ? "SAVING..." : "SAVE SETTINGS"}
+        </Button>
+        <Button variant="outline" onClick={signOut} className="font-bold text-xs uppercase text-destructive hover:text-destructive rounded-full px-8">
+          SIGN OUT
+        </Button>
+      </div>
     </div>
   );
 }
