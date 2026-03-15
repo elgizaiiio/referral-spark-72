@@ -5,6 +5,7 @@ import { EarningsCalculator } from "@/components/landing/EarningsCalculator";
 import { FeaturesGrid } from "@/components/landing/FeaturesGrid";
 import { TrustSection } from "@/components/landing/TrustSection";
 import { CommissionInfo } from "@/components/landing/CommissionInfo";
+import { FAQSection } from "@/components/landing/FAQSection";
 import { CTAFooter } from "@/components/landing/CTAFooter";
 import { LandingFooter } from "@/components/landing/LandingFooter";
 
@@ -18,6 +19,7 @@ export default function Landing() {
       <FeaturesGrid />
       <TrustSection />
       <CommissionInfo />
+      <FAQSection />
       <CTAFooter />
       <LandingFooter />
     </div>

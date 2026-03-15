@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -21,59 +21,32 @@ export function WithdrawForm({ userId, availableBalance, onSuccess }: WithdrawFo
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const numAmount = parseFloat(amount);
-    if (isNaN(numAmount) || numAmount <= 0) {
-      toast.error("Enter a valid amount");
-      return;
-    }
-    if (numAmount > availableBalance) {
-      toast.error("Insufficient balance");
-      return;
-    }
+    if (isNaN(numAmount) || numAmount <= 0) { toast.error("Enter a valid amount"); return; }
+    if (numAmount > availableBalance) { toast.error("Insufficient balance"); return; }
 
     setSubmitting(true);
     const { error } = await supabase.from("withdrawal_requests").insert({
-      user_id: userId,
-      amount: numAmount,
-      method,
-      payment_details: details,
+      user_id: userId, amount: numAmount, method, payment_details: details,
     });
-
-    if (error) {
-      toast.error(error.message);
-    } else {
-      toast.success("Withdrawal request submitted!");
-      setAmount("");
-      setDetails("");
-      onSuccess();
-    }
+    if (error) toast.error(error.message);
+    else { toast.success("Withdrawal request submitted!"); setAmount(""); setDetails(""); onSuccess(); }
     setSubmitting(false);
   };
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="text-lg">Request Withdrawal</CardTitle>
-      </CardHeader>
-      <CardContent>
+      <CardContent className="p-6">
+        <h3 className="text-sm font-bold text-foreground uppercase tracking-wider mb-4">REQUEST WITHDRAWAL</h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Amount ($)</label>
-              <Input
-                type="number"
-                step="0.01"
-                min="1"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                placeholder="0.00"
-              />
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Amount ($)</label>
+              <Input type="number" step="0.01" min="1" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="0.00" className="bg-background border-border" />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Method</label>
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Method</label>
               <Select value={method} onValueChange={setMethod}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
+                <SelectTrigger className="bg-background border-border"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="paypal">PayPal</SelectItem>
                   <SelectItem value="bank_transfer">Bank Transfer</SelectItem>
@@ -82,16 +55,12 @@ export function WithdrawForm({ userId, availableBalance, onSuccess }: WithdrawFo
               </Select>
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Payment Details</label>
-              <Input
-                value={details}
-                onChange={(e) => setDetails(e.target.value)}
-                placeholder="PayPal email or wallet"
-              />
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Payment Details</label>
+              <Input value={details} onChange={(e) => setDetails(e.target.value)} placeholder="PayPal email or wallet" className="bg-background border-border" />
             </div>
           </div>
-          <Button type="submit" disabled={submitting}>
-            {submitting ? "Submitting..." : "Request Withdrawal"}
+          <Button type="submit" className="gradient-cta border-0 text-foreground hover:opacity-90 font-bold rounded-full px-8" disabled={submitting}>
+            {submitting ? "SUBMITTING..." : "REQUEST WITHDRAWAL"}
           </Button>
         </form>
       </CardContent>

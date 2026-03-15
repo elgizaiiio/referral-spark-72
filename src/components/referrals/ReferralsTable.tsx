@@ -1,13 +1,7 @@
 import { useState, useMemo } from "react";
 import {
-  useReactTable,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getSortedRowModel,
-  getPaginationRowModel,
-  flexRender,
-  createColumnHelper,
-  type SortingState,
+  useReactTable, getCoreRowModel, getFilteredRowModel, getSortedRowModel,
+  getPaginationRowModel, flexRender, createColumnHelper, type SortingState,
 } from "@tanstack/react-table";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -15,7 +9,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { format } from "date-fns";
-import { Search, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Referral {
   id: string;
@@ -53,16 +46,12 @@ const columns = [
   columnHelper.accessor("status", {
     header: "Status",
     cell: (info) => (
-      <Badge variant={statusVariant(info.getValue())} className="capitalize">
-        {info.getValue()}
-      </Badge>
+      <Badge variant={statusVariant(info.getValue())} className="capitalize text-xs">{info.getValue()}</Badge>
     ),
   }),
 ];
 
-interface ReferralsTableProps {
-  referrals: Referral[];
-}
+interface ReferralsTableProps { referrals: Referral[]; }
 
 export function ReferralsTable({ referrals }: ReferralsTableProps) {
   const [sorting, setSorting] = useState<SortingState>([{ id: "created_at", desc: true }]);
@@ -75,34 +64,25 @@ export function ReferralsTable({ referrals }: ReferralsTableProps) {
   }, [referrals, statusFilter]);
 
   const table = useReactTable({
-    data: filteredData,
-    columns,
+    data: filteredData, columns,
     state: { sorting, globalFilter },
-    onSortingChange: setSorting,
-    onGlobalFilterChange: setGlobalFilter,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    onSortingChange: setSorting, onGlobalFilterChange: setGlobalFilter,
+    getCoreRowModel: getCoreRowModel(), getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(), getPaginationRowModel: getPaginationRowModel(),
     initialState: { pagination: { pageSize: 10 } },
   });
 
   return (
     <div className="space-y-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            placeholder="Search referrals..."
-            value={globalFilter}
-            onChange={(e) => setGlobalFilter(e.target.value)}
-            className="pl-10 w-64"
-          />
-        </div>
+        <Input
+          placeholder="Search referrals..."
+          value={globalFilter}
+          onChange={(e) => setGlobalFilter(e.target.value)}
+          className="w-64 bg-background border-border"
+        />
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-40">
-            <SelectValue placeholder="Filter status" />
-          </SelectTrigger>
+          <SelectTrigger className="w-40 bg-background border-border"><SelectValue placeholder="Filter status" /></SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Statuses</SelectItem>
             <SelectItem value="pending">Pending</SelectItem>
@@ -112,17 +92,13 @@ export function ReferralsTable({ referrals }: ReferralsTableProps) {
         </Select>
       </div>
 
-      <div className="rounded-lg border">
+      <div className="rounded-lg border border-border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead
-                    key={header.id}
-                    className="cursor-pointer select-none"
-                    onClick={header.column.getToggleSortingHandler()}
-                  >
+                  <TableHead key={header.id} className="cursor-pointer select-none text-xs uppercase tracking-wider" onClick={header.column.getToggleSortingHandler()}>
                     {flexRender(header.column.columnDef.header, header.getContext())}
                     {{ asc: " ↑", desc: " ↓" }[header.column.getIsSorted() as string] ?? ""}
                   </TableHead>
@@ -132,18 +108,12 @@ export function ReferralsTable({ referrals }: ReferralsTableProps) {
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows.length === 0 ? (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="py-8 text-center text-muted-foreground">
-                  No referrals found
-                </TableCell>
-              </TableRow>
+              <TableRow><TableCell colSpan={columns.length} className="py-8 text-center text-muted-foreground">No referrals found</TableCell></TableRow>
             ) : (
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
+                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                   ))}
                 </TableRow>
               ))
@@ -153,16 +123,12 @@ export function ReferralsTable({ referrals }: ReferralsTableProps) {
       </div>
 
       <div className="flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-xs text-muted-foreground font-bold uppercase">
           Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
         </p>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-            <ChevronRight className="h-4 w-4" />
-          </Button>
+          <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()} className="font-bold text-xs">PREV</Button>
+          <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()} className="font-bold text-xs">NEXT</Button>
         </div>
       </div>
     </div>

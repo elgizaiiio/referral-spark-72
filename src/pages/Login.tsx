@@ -3,8 +3,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { Navigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 export default function Login() {
   const { user, loading, signIn } = useAuth();
@@ -34,72 +33,65 @@ export default function Login() {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center bg-background px-4">
-      {/* Background glow */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 h-[400px] w-[600px] rounded-full bg-primary/8 blur-[120px]" />
       </div>
 
       <div className="absolute left-4 top-4">
-        <Button variant="ghost" size="sm" asChild>
-          <Link to="/landing">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back
-          </Link>
-        </Button>
+        <Link to="/landing" className="text-sm text-muted-foreground hover:text-foreground font-bold uppercase transition-colors">
+          ← BACK
+        </Link>
       </div>
 
-      <Card className="relative w-full max-w-md border-border bg-card/80 backdrop-blur-xl shadow-2xl">
-        <CardHeader className="text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl gradient-cta font-bold text-foreground text-2xl">
-            M
+      <div className="relative w-full max-w-md bg-card border border-border rounded-2xl p-8 shadow-2xl">
+        <div className="text-center mb-8">
+          <img src={logo} alt="Megsy" className="h-14 w-14 rounded-2xl mx-auto mb-4" />
+          <h1 className="text-2xl font-black text-foreground uppercase">PARTNER LOGIN</h1>
+          <p className="text-sm text-muted-foreground mt-1">Sign in with your Megsy AI account</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-foreground uppercase tracking-wider">Email</label>
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              required
+              className="bg-background border-border h-12"
+            />
           </div>
-          <CardTitle className="text-2xl text-foreground">Megsy AI Referral Portal</CardTitle>
-          <CardDescription>Sign in with your Megsy AI account</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Email</label>
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
-                required
-                className="bg-background border-border"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Password</label>
-              <Input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-                className="bg-background border-border"
-              />
-            </div>
-            {error && (
-              <p className="text-sm text-destructive">{error}</p>
-            )}
-            <Button type="submit" className="w-full gradient-cta border-0 text-foreground hover:opacity-90" disabled={submitting}>
-              {submitting ? "Signing in..." : "Sign In"}
-            </Button>
-          </form>
-          <p className="mt-6 text-center text-sm text-muted-foreground">
-            Don't have an account?{" "}
-            <a
-              href="https://smart-hub-egy.lovable.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-primary hover:underline"
-            >
-              Sign up on Megsy AI
-            </a>
-          </p>
-        </CardContent>
-      </Card>
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-foreground uppercase tracking-wider">Password</label>
+            <Input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required
+              className="bg-background border-border h-12"
+            />
+          </div>
+          {error && (
+            <p className="text-sm text-destructive">{error}</p>
+          )}
+          <Button type="submit" className="w-full gradient-cta border-0 text-foreground hover:opacity-90 h-12 font-bold text-base rounded-full" disabled={submitting}>
+            {submitting ? "SIGNING IN..." : "SIGN IN"}
+          </Button>
+        </form>
+        <p className="mt-6 text-center text-sm text-muted-foreground">
+          Don't have an account?{" "}
+          <a
+            href="https://megsyai.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-bold text-primary hover:underline"
+          >
+            Sign up on Megsy AI
+          </a>
+        </p>
+      </div>
     </div>
   );
 }

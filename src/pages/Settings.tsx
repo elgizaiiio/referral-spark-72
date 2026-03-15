@@ -15,10 +15,8 @@ export default function SettingsPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-foreground">Settings</h1>
-        <p className="text-sm text-muted-foreground">Manage your account and payment preferences</p>
-      </div>
+      <h1 className="heading-massive text-3xl lg:text-4xl text-foreground">SETTINGS</h1>
+      <p className="text-sm text-muted-foreground">Manage your account and payment preferences</p>
       <SettingsForm
         userId={user.id}
         referralCode={referralCode}

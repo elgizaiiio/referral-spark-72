@@ -10,11 +10,11 @@ export function DashboardLayout() {
         <div className="min-h-screen flex w-full bg-background">
           <AppSidebar />
           <div className="flex-1 flex flex-col">
-            <header className="h-14 flex items-center border-b border-border bg-card/50 backdrop-blur-xl px-4">
+            <header className="h-14 flex items-center border-b border-border bg-card/30 backdrop-blur-xl px-4">
               <SidebarTrigger className="mr-4" />
-              <h2 className="text-sm font-medium text-muted-foreground">Megsy AI Referral Portal</h2>
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">MEGSY AI PARTNER PORTAL</span>
             </header>
-            <main className="flex-1 overflow-auto p-4 lg:p-6">
+            <main className="flex-1 overflow-auto p-4 lg:p-8">
               <Outlet />
             </main>
           </div>

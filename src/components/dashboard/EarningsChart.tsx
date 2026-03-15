@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { format, subDays, startOfDay } from "date-fns";
 
@@ -18,10 +18,8 @@ export function EarningsChart({ earnings }: EarningsChartProps) {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="text-lg">Earnings (Last 30 Days)</CardTitle>
-      </CardHeader>
-      <CardContent>
+      <CardContent className="p-6">
+        <h3 className="text-sm font-bold text-foreground uppercase tracking-wider mb-4">EARNINGS (30 DAYS)</h3>
         <div className="h-[280px]">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={chartData}>
@@ -31,15 +29,15 @@ export function EarningsChart({ earnings }: EarningsChartProps) {
                   <stop offset="95%" stopColor="hsl(160, 84%, 39%)" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(0, 0%, 14%)" />
-              <XAxis dataKey="date" fontSize={12} tickLine={false} axisLine={false} tick={{ fill: "hsl(0, 0%, 53%)" }} />
-              <YAxis fontSize={12} tickLine={false} axisLine={false} tickFormatter={(v) => `$${v}`} tick={{ fill: "hsl(0, 0%, 53%)" }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(0, 0%, 12%)" />
+              <XAxis dataKey="date" fontSize={11} tickLine={false} axisLine={false} tick={{ fill: "hsl(0, 0%, 45%)" }} />
+              <YAxis fontSize={11} tickLine={false} axisLine={false} tickFormatter={(v) => `$${v}`} tick={{ fill: "hsl(0, 0%, 45%)" }} />
               <Tooltip
                 contentStyle={{
-                  background: "hsl(0, 0%, 7%)",
-                  border: "1px solid hsl(0, 0%, 14%)",
+                  background: "hsl(0, 0%, 6%)",
+                  border: "1px solid hsl(0, 0%, 12%)",
                   borderRadius: "8px",
-                  fontSize: "13px",
+                  fontSize: "12px",
                   color: "hsl(0, 0%, 100%)",
                 }}
                 formatter={(value: number) => [`$${value.toFixed(2)}`, "Earnings"]}

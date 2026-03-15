@@ -9,6 +9,7 @@ import Landing from "./pages/Landing";
 import Overview from "./pages/Overview";
 import Referrals from "./pages/Referrals";
 import Payouts from "./pages/Payouts";
+import Resources from "./pages/Resources";
 import SettingsPage from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/" element={<Overview />} />
             <Route path="/referrals" element={<Referrals />} />
             <Route path="/payouts" element={<Payouts />} />
+            <Route path="/resources" element={<Resources />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
           <Route path="*" element={<NotFound />} />

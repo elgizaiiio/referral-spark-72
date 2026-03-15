@@ -17,10 +17,8 @@ export default function Payouts() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-foreground">Payouts</h1>
-        <p className="text-sm text-muted-foreground">Manage your earnings and withdrawal requests</p>
-      </div>
+      <h1 className="heading-massive text-3xl lg:text-4xl text-foreground">PAYOUTS</h1>
+      <p className="text-sm text-muted-foreground">Manage your earnings and withdrawal requests</p>
 
       <PayoutSummary
         availableBalance={availableBalance}
