@@ -7,17 +7,13 @@ interface EarningsChartProps {
 }
 
 export function EarningsChart({ earnings }: EarningsChartProps) {
-  // Build last 30 days data
   const chartData = Array.from({ length: 30 }, (_, i) => {
     const date = startOfDay(subDays(new Date(), 29 - i));
     const dateStr = format(date, "yyyy-MM-dd");
     const dayEarnings = earnings
       .filter((e) => format(new Date(e.created_at), "yyyy-MM-dd") === dateStr)
       .reduce((sum, e) => sum + Number(e.amount), 0);
-    return {
-      date: format(date, "MMM dd"),
-      earnings: dayEarnings,
-    };
+    return { date: format(date, "MMM dd"), earnings: dayEarnings };
   });
 
   return (
@@ -35,37 +31,20 @@ export function EarningsChart({ earnings }: EarningsChartProps) {
                   <stop offset="95%" stopColor="hsl(160, 84%, 39%)" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(214, 32%, 91%)" />
-              <XAxis
-                dataKey="date"
-                fontSize={12}
-                tickLine={false}
-                axisLine={false}
-                tick={{ fill: "hsl(215, 16%, 47%)" }}
-              />
-              <YAxis
-                fontSize={12}
-                tickLine={false}
-                axisLine={false}
-                tickFormatter={(v) => `$${v}`}
-                tick={{ fill: "hsl(215, 16%, 47%)" }}
-              />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(0, 0%, 14%)" />
+              <XAxis dataKey="date" fontSize={12} tickLine={false} axisLine={false} tick={{ fill: "hsl(0, 0%, 53%)" }} />
+              <YAxis fontSize={12} tickLine={false} axisLine={false} tickFormatter={(v) => `$${v}`} tick={{ fill: "hsl(0, 0%, 53%)" }} />
               <Tooltip
                 contentStyle={{
-                  background: "hsl(0, 0%, 100%)",
-                  border: "1px solid hsl(214, 32%, 91%)",
+                  background: "hsl(0, 0%, 7%)",
+                  border: "1px solid hsl(0, 0%, 14%)",
                   borderRadius: "8px",
                   fontSize: "13px",
+                  color: "hsl(0, 0%, 100%)",
                 }}
                 formatter={(value: number) => [`$${value.toFixed(2)}`, "Earnings"]}
               />
-              <Area
-                type="monotone"
-                dataKey="earnings"
-                stroke="hsl(160, 84%, 39%)"
-                strokeWidth={2}
-                fill="url(#earningsGradient)"
-              />
+              <Area type="monotone" dataKey="earnings" stroke="hsl(160, 84%, 39%)" strokeWidth={2} fill="url(#earningsGradient)" />
             </AreaChart>
           </ResponsiveContainer>
         </div>

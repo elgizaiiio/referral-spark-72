@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowLeft } from "lucide-react";
 
 export default function Login() {
   const { user, loading, signIn } = useAuth();
@@ -32,13 +33,27 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <Card className="w-full max-w-md shadow-lg">
+    <div className="relative flex min-h-screen items-center justify-center bg-background px-4">
+      {/* Background glow */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 h-[400px] w-[600px] rounded-full bg-primary/8 blur-[120px]" />
+      </div>
+
+      <div className="absolute left-4 top-4">
+        <Button variant="ghost" size="sm" asChild>
+          <Link to="/landing">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back
+          </Link>
+        </Button>
+      </div>
+
+      <Card className="relative w-full max-w-md border-border bg-card/80 backdrop-blur-xl shadow-2xl">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground font-bold text-2xl">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl gradient-cta font-bold text-foreground text-2xl">
             M
           </div>
-          <CardTitle className="text-2xl">Megsy AI Referral Portal</CardTitle>
+          <CardTitle className="text-2xl text-foreground">Megsy AI Referral Portal</CardTitle>
           <CardDescription>Sign in with your Megsy AI account</CardDescription>
         </CardHeader>
         <CardContent>
@@ -51,6 +66,7 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
                 required
+                className="bg-background border-border"
               />
             </div>
             <div className="space-y-2">
@@ -61,12 +77,13 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
+                className="bg-background border-border"
               />
             </div>
             {error && (
               <p className="text-sm text-destructive">{error}</p>
             )}
-            <Button type="submit" className="w-full" disabled={submitting}>
+            <Button type="submit" className="w-full gradient-cta border-0 text-foreground hover:opacity-90" disabled={submitting}>
               {submitting ? "Signing in..." : "Sign In"}
             </Button>
           </form>
