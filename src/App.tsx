@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import Login from "./pages/Login";
+import OAuthCallback from "./pages/OAuthCallback";
 import Landing from "./pages/Landing";
 import Overview from "./pages/Overview";
 import Referrals from "./pages/Referrals";
@@ -25,6 +26,7 @@ const App = () => (
         <Routes>
           <Route path="/landing" element={<Landing />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/callback" element={<OAuthCallback />} />
           <Route element={<DashboardLayout />}>
             <Route path="/" element={<Overview />} />
             <Route path="/referrals" element={<Referrals />} />
