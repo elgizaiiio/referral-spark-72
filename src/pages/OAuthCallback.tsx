@@ -29,7 +29,7 @@ export default function OAuthCallback() {
     // Verify state matches
     const savedState = sessionStorage.getItem("oauth_state");
     if (savedState && state !== savedState) {
-      setError("خطأ في التحقق من الأمان (state mismatch)");
+      setError("Security verification failed (state mismatch)");
       return;
     }
     sessionStorage.removeItem("oauth_state");
