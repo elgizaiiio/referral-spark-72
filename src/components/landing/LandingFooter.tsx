@@ -48,7 +48,7 @@ export function LandingFooter() {
           <p className="text-[10px] sm:text-xs text-muted-foreground">© 2026 Megsy AI. All rights reserved.</p>
           <div className="flex gap-4">
             <a target="_blank" rel="noopener noreferrer" className="text-[10px] sm:text-xs text-muted-foreground hover:text-foreground transition-colors" href="https://terms.megsyai.com/">Terms</a>
-            <a href="https://megsyai.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[10px] sm:text-xs text-muted-foreground hover:text-foreground transition-colors">Privacy</a>
+            <a target="_blank" rel="noopener noreferrer" className="text-[10px] sm:text-xs text-muted-foreground hover:text-foreground transition-colors" href="https://privacy.megsyai.com/">Privacy</a>
           </div>
         </div>
       </div>
