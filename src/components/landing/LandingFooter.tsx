@@ -8,7 +8,7 @@ export function LandingFooter() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 mb-12 sm:mb-16">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <img src={logo} alt="Megsy" className="h-8 w-8 rounded-lg" />
+              <img alt="Megsy" className="h-8 w-8 rounded-lg" src="/lovable-uploads/1fc24459-a31a-4ba6-826a-bd6f5c47cdb4.png" />
               <span className="text-foreground font-bold">Megsy AI</span>
             </div>
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
@@ -52,6 +52,6 @@ export function LandingFooter() {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>);
+
 }
