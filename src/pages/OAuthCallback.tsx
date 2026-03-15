@@ -39,7 +39,7 @@ export default function OAuthCallback() {
 
   const exchangeCode = async (code: string) => {
     try {
-      setStatus("جاري التحقق من الحساب...");
+      setStatus("Verifying account...");
 
       const redirectUri = `${window.location.origin}/callback`;
 
