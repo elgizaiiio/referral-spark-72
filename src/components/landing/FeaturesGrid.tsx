@@ -1,46 +1,71 @@
-import { QrCode, Share2, BarChart3, Zap, Shield, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 
 const features = [
-  { title: "QR Code Sharing", desc: "Generate QR codes for your referral link. Perfect for in-person sharing.", icon: QrCode },
-  { title: "Social Media Sharing", desc: "One-click sharing to WhatsApp, Twitter, Telegram, and Facebook.", icon: Share2 },
-  { title: "Real-time Tracking", desc: "Track clicks, signups, and earnings in real-time from your dashboard.", icon: BarChart3 },
-  { title: "Instant Payouts", desc: "Request withdrawals anytime via PayPal, bank transfer, or crypto.", icon: Zap },
-  { title: "Secure & Reliable", desc: "Your data and earnings are protected with enterprise-grade security.", icon: Shield },
-  { title: "Global Reach", desc: "Refer anyone, anywhere in the world. No geographic restrictions.", icon: Globe },
+  {
+    title: "REAL-TIME TRACKING",
+    description: "Watch your clicks, signups, and earnings update in real-time. Every conversion tracked instantly.",
+  },
+  {
+    title: "INSTANT PAYOUTS",
+    description: "Withdraw your earnings anytime via PayPal, bank transfer, or crypto. No delays, no minimums.",
+  },
+  {
+    title: "MARKETING TOOLS",
+    description: "Pre-built social media posts, email templates, and banner images to maximize your conversions.",
+  },
+  {
+    title: "QR CODE SHARING",
+    description: "Generate QR codes for your referral link. Perfect for events, business cards, and offline sharing.",
+  },
+  {
+    title: "PERFORMANCE TIERS",
+    description: "Unlock higher commission rates as you grow. Top partners earn up to 30% per referral.",
+  },
+  {
+    title: "DEDICATED SUPPORT",
+    description: "Get priority support from our partner success team. We help you maximize your earnings.",
+  },
+  {
+    title: "SOCIAL SHARING",
+    description: "One-click sharing to WhatsApp, Twitter, Telegram, Facebook, and more platforms.",
+  },
+  {
+    title: "DETAILED ANALYTICS",
+    description: "Deep insights into your referral performance. Know what works and optimize your strategy.",
+  },
 ];
 
 export function FeaturesGrid() {
   return (
-    <section id="features" className="py-20 lg:py-32 border-t border-border">
+    <section id="features" className="py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center"
+          className="text-center mb-16"
         >
-          <p className="text-sm font-semibold uppercase tracking-widest text-primary">FEATURES</p>
-          <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl lg:text-5xl">
-            Everything You <span className="gradient-text">Need</span>
+          <h2 className="heading-massive text-4xl sm:text-5xl lg:text-7xl text-foreground">
+            BUILT FOR{" "}
+            <span className="gradient-text">EARNERS</span>
           </h2>
+          <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
+            Everything you need to build a sustainable income
+          </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((f, i) => (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((feature, i) => (
             <motion.div
-              key={f.title}
+              key={feature.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="group rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/30"
+              transition={{ delay: i * 0.05 }}
+              className="bg-card rounded-xl border border-border p-6 hover:border-primary/30 transition-colors"
             >
-              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10">
-                <f.icon className="h-5 w-5 text-primary" />
-              </div>
-              <h3 className="mt-4 text-base font-bold text-foreground">{f.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
+              <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">{feature.title}</h3>
+              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
             </motion.div>
           ))}
         </div>

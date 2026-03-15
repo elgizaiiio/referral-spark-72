@@ -1,43 +1,45 @@
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-
-const stats = [
-  { value: "500+", label: "Active Referrers" },
-  { value: "$25K+", label: "Paid Out" },
-  { value: "2,000+", label: "Signups Generated" },
-  { value: "4.9/5", label: "Satisfaction Rate" },
-];
 
 export function TrustSection() {
   return (
-    <section className="py-20 lg:py-32 border-t border-border">
-      <div className="mx-auto max-w-7xl px-4 lg:px-8">
+    <section className="py-24 lg:py-32">
+      <div className="mx-auto max-w-5xl px-4 text-center lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center"
         >
-          <p className="text-sm font-semibold uppercase tracking-widest text-primary">TRUSTED BY CREATORS</p>
-          <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl lg:text-5xl">
-            Join a Growing <span className="gradient-text">Community</span>
+          <h2 className="heading-massive text-4xl sm:text-5xl lg:text-7xl text-foreground">
+            TRUSTED BY{" "}
+            <span className="gradient-text">LEADING CREATORS</span>
           </h2>
-        </motion.div>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+            Join hundreds of partners already earning with Megsy AI. Our partner program is designed for creators, influencers, and entrepreneurs who want to build real income.
+          </p>
 
-        <div className="mt-16 grid grid-cols-2 gap-6 lg:grid-cols-4">
-          {stats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="rounded-2xl border border-border bg-card p-8 text-center"
-            >
-              <p className="text-3xl font-black gradient-text sm:text-4xl">{s.value}</p>
-              <p className="mt-2 text-sm text-muted-foreground">{s.label}</p>
-            </motion.div>
-          ))}
-        </div>
+          <div className="mt-12 grid gap-8 sm:grid-cols-3">
+            <div>
+              <p className="text-4xl font-black text-foreground">500+</p>
+              <p className="mt-1 text-sm text-muted-foreground uppercase tracking-wider">Active Partners</p>
+            </div>
+            <div>
+              <p className="text-4xl font-black gradient-text">$250K+</p>
+              <p className="mt-1 text-sm text-muted-foreground uppercase tracking-wider">Paid Out</p>
+            </div>
+            <div>
+              <p className="text-4xl font-black text-success">20%</p>
+              <p className="mt-1 text-sm text-muted-foreground uppercase tracking-wider">Recurring Commission</p>
+            </div>
+          </div>
+
+          <div className="mt-12">
+            <Button size="lg" className="gradient-cta glow-cta border-0 text-foreground text-lg px-10 h-14 hover:opacity-90 rounded-full font-bold" asChild>
+              <Link to="/login">BECOME A PARTNER</Link>
+            </Button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
