@@ -9,7 +9,7 @@ export default function OAuthCallback() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  const [status, setStatus] = useState("جاري تسجيل الدخول...");
+  const [status, setStatus] = useState("Signing in...");
 
   useEffect(() => {
     const code = searchParams.get("code");
@@ -17,19 +17,19 @@ export default function OAuthCallback() {
     const errorParam = searchParams.get("error");
 
     if (errorParam) {
-      setError("تم رفض الطلب من قبل المستخدم");
+      setError("Request was denied by the user");
       return;
     }
 
     if (!code) {
-      setError("لم يتم العثور على كود التفويض");
+      setError("Authorization code not found");
       return;
     }
 
     // Verify state matches
     const savedState = sessionStorage.getItem("oauth_state");
     if (savedState && state !== savedState) {
-      setError("خطأ في التحقق من الأمان (state mismatch)");
+      setError("Security verification failed (state mismatch)");
       return;
     }
     sessionStorage.removeItem("oauth_state");
@@ -39,7 +39,7 @@ export default function OAuthCallback() {
 
   const exchangeCode = async (code: string) => {
     try {
-      setStatus("جاري التحقق من الحساب...");
+      setStatus("Verifying account...");
 
       const redirectUri = `${window.location.origin}/callback`;
 
@@ -51,11 +51,11 @@ export default function OAuthCallback() {
       );
 
       if (fnError || !data?.token_hash) {
-        setError(data?.error || fnError?.message || "فشل في تسجيل الدخول");
+        setError(data?.error || fnError?.message || "Login failed");
         return;
       }
 
-      setStatus("جاري إنشاء الجلسة...");
+      setStatus("Creating session...");
 
       // Use the magic link token to establish session
       const { error: verifyError } = await supabase.auth.verifyOtp({
@@ -64,14 +64,14 @@ export default function OAuthCallback() {
       });
 
       if (verifyError) {
-        setError("فشل في إنشاء الجلسة: " + verifyError.message);
+        setError("Failed to create session: " + verifyError.message);
         return;
       }
 
-      setStatus("تم تسجيل الدخول بنجاح!");
+      setStatus("Login successful!");
       navigate("/", { replace: true });
     } catch (err: any) {
-      setError(err.message || "حدث خطأ غير متوقع");
+      setError(err.message || "An unexpected error occurred");
     }
   };
 
@@ -95,7 +95,7 @@ export default function OAuthCallback() {
               onClick={() => navigate("/login", { replace: true })}
               className="text-sm text-primary font-bold hover:underline"
             >
-              العودة لتسجيل الدخول
+              Back to Login
             </button>
           </div>
         ) : (

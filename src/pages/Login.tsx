@@ -54,7 +54,7 @@ export default function Login() {
             PARTNER LOGIN
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground mt-2">
-            سجّل دخولك عبر حساب Megsy الخاص بك
+            Sign in with your Megsy account
           </p>
         </div>
 
@@ -67,14 +67,14 @@ export default function Login() {
         </Button>
 
         <p className="mt-6 text-center text-[10px] sm:text-xs text-muted-foreground">
-          ليس لديك حساب؟{" "}
+          Don't have an account?{" "}
           <a
             href="https://smart-hub-egy.lovable.app"
             target="_blank"
             rel="noopener noreferrer"
             className="font-bold text-primary hover:underline"
           >
-            أنشئ حساب مجاني على Megsy
+            Create a free Megsy account
           </a>
         </p>
       </div>
