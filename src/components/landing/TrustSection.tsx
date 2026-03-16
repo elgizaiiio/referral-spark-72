@@ -16,7 +16,7 @@ export function TrustSection() {
             <span className="gradient-text">CREATORS</span>
           </h2>
           <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-sm sm:text-lg text-muted-foreground">
-            Our partner program is designed for creators, influencers, and entrepreneurs who want to build real income with recurring commissions.
+            Our partner program is designed for creators, influencers, and entrepreneurs who want to build real income with forever commissions.
           </p>
 
           <div className="mt-8 sm:mt-12 grid gap-6 sm:gap-8 grid-cols-3">
@@ -26,7 +26,7 @@ export function TrustSection() {
             </div>
             <div>
               <p className="text-2xl sm:text-4xl font-black gradient-text">20%</p>
-              <p className="mt-1 text-[10px] sm:text-sm text-muted-foreground uppercase tracking-wider">Recurring</p>
+              <p className="mt-1 text-[10px] sm:text-sm text-muted-foreground uppercase tracking-wider">Forever</p>
             </div>
             <div>
               <p className="text-2xl sm:text-4xl font-black text-success">90 Days</p>

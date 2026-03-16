@@ -22,7 +22,7 @@ export function EarningExamples() {
           <h2 className="heading-massive text-3xl sm:text-5xl lg:text-7xl text-foreground">
             EARNING <span className="gradient-text">EXAMPLES</span>
           </h2>
-          <p className="text-muted-foreground mt-4 text-sm sm:text-base">Scenarios showing potential earnings with 20% recurring commission</p>
+          <p className="text-muted-foreground mt-4 text-sm sm:text-base">Scenarios showing potential earnings with 20% forever commission</p>
         </motion.div>
 
         <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-3">
@@ -37,7 +37,7 @@ export function EarningExamples() {
             >
               <p className="text-[10px] sm:text-xs text-muted-foreground font-bold">{ex.referrals} REFERRALS</p>
               <p className="heading-massive text-xl sm:text-3xl gradient-text mt-2">{ex.monthly}</p>
-              <p className="text-[10px] sm:text-xs text-muted-foreground">/month recurring</p>
+              <p className="text-[10px] sm:text-xs text-muted-foreground">/month forever</p>
               <p className="text-sm sm:text-lg font-black text-foreground mt-2 sm:mt-3">{ex.yearly}/year</p>
               <p className="text-[10px] sm:text-xs text-muted-foreground mt-2">{ex.desc}</p>
             </motion.div>

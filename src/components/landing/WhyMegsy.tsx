@@ -5,7 +5,7 @@ const reasons = [
   { title: "COMPETITIVE PRICING", desc: "Starting at just $9/month, Megsy AI is accessible to everyone. Lower price = easier to convert = more commissions." },
   { title: "PRODUCT SELLS ITSELF", desc: "Once people try Megsy AI, they're hooked. The product quality speaks for itself, making your job easier." },
   { title: "TRANSPARENT TRACKING", desc: "Real-time dashboard with click tracking, conversion analytics, and earnings reports. You always know exactly where you stand." },
-  { title: "RECURRING REVENUE", desc: "Every referral earns you 20% every month they stay subscribed. Build a growing passive income stream." },
+  { title: "FOREVER REVENUE", desc: "Every referral earns you 20% forever — every month they stay subscribed. Build a growing passive income stream." },
   { title: "FAST PAYOUTS", desc: "Request withdrawals anytime. No minimum threshold. Most payouts processed within 24-48 hours." },
 ];
 

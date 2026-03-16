@@ -7,6 +7,31 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { format, subDays, startOfDay } from "date-fns";
 import { useMemo } from "react";
 
+function parseDevice(ua: string | null): { device: string; os: string; browser: string } {
+  if (!ua) return { device: "Unknown", os: "Unknown", browser: "Unknown" };
+  
+  let device = "Desktop";
+  if (/Mobile|Android.*Mobile|iPhone|iPod/i.test(ua)) device = "Mobile";
+  else if (/iPad|Android(?!.*Mobile)|Tablet/i.test(ua)) device = "Tablet";
+  
+  let os = "Other";
+  if (/Windows/i.test(ua)) os = "Windows";
+  else if (/Mac OS X|macOS/i.test(ua)) os = "macOS";
+  else if (/iPhone|iPad|iPod/i.test(ua)) os = "iOS";
+  else if (/Android/i.test(ua)) os = "Android";
+  else if (/Linux/i.test(ua)) os = "Linux";
+  else if (/CrOS/i.test(ua)) os = "ChromeOS";
+  
+  let browser = "Other";
+  if (/Edg\//i.test(ua)) browser = "Edge";
+  else if (/Chrome/i.test(ua) && !/Edg/i.test(ua)) browser = "Chrome";
+  else if (/Firefox/i.test(ua)) browser = "Firefox";
+  else if (/Safari/i.test(ua) && !/Chrome/i.test(ua)) browser = "Safari";
+  else if (/Opera|OPR/i.test(ua)) browser = "Opera";
+  
+  return { device, os, browser };
+}
+
 export default function Analytics() {
   const { user } = useAuth();
   const { clicks, referrals, totalClicks, totalSignups, conversionRate, isLoading: statsLoading } = useReferralStats(user?.id);
@@ -78,6 +103,33 @@ export default function Analytics() {
       .slice(0, 8);
   }, [clicks]);
 
+  const deviceData = useMemo(() => {
+    const map: Record<string, number> = {};
+    clicks.forEach((c) => {
+      const { device } = parseDevice(c.user_agent);
+      map[device] = (map[device] || 0) + 1;
+    });
+    return Object.entries(map).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value);
+  }, [clicks]);
+
+  const osData = useMemo(() => {
+    const map: Record<string, number> = {};
+    clicks.forEach((c) => {
+      const { os } = parseDevice(c.user_agent);
+      map[os] = (map[os] || 0) + 1;
+    });
+    return Object.entries(map).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value);
+  }, [clicks]);
+
+  const browserData = useMemo(() => {
+    const map: Record<string, number> = {};
+    clicks.forEach((c) => {
+      const { browser } = parseDevice(c.user_agent);
+      map[browser] = (map[browser] || 0) + 1;
+    });
+    return Object.entries(map).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value);
+  }, [clicks]);
+
   const thisWeekClicks = useMemo(() => {
     const weekAgo = subDays(new Date(), 7);
     return clicks.filter((c) => new Date(c.clicked_at) >= weekAgo).length;
@@ -96,7 +148,7 @@ export default function Analytics() {
     ? (((thisWeekClicks - lastWeekClicks) / lastWeekClicks) * 100).toFixed(0)
     : thisWeekClicks > 0 ? "+100" : "0";
 
-  const COLORS = ["hsl(160, 84%, 39%)", "hsl(271, 91%, 65%)", "hsl(38, 92%, 50%)", "hsl(330, 81%, 60%)"];
+  const COLORS = ["hsl(160, 84%, 39%)", "hsl(271, 91%, 65%)", "hsl(38, 92%, 50%)", "hsl(330, 81%, 60%)", "hsl(200, 70%, 50%)", "hsl(0, 60%, 50%)"];
 
   if (isLoading) {
     return (
@@ -109,6 +161,34 @@ export default function Analytics() {
       </div>
     );
   }
+
+  const renderBarList = (data: { name: string; value: number }[], title: string) => (
+    <Card>
+      <CardContent className="p-4 sm:p-6">
+        <h3 className="text-xs sm:text-sm font-bold text-foreground uppercase tracking-wider mb-4">{title}</h3>
+        {data.length === 0 ? (
+          <p className="text-sm text-muted-foreground py-8 text-center">No data yet</p>
+        ) : (
+          <div className="space-y-3">
+            {data.map((item, i) => (
+              <div key={item.name} className="flex items-center justify-between">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                  <span className="w-2 h-2 rounded-full shrink-0" style={{ background: COLORS[i % COLORS.length] }} />
+                  <span className="text-xs sm:text-sm font-bold text-foreground truncate">{item.name}</span>
+                </div>
+                <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+                  <div className="w-16 sm:w-24 h-2 rounded-full bg-accent overflow-hidden">
+                    <div className="h-full rounded-full" style={{ width: `${(item.value / (data[0]?.value || 1)) * 100}%`, background: COLORS[i % COLORS.length] }} />
+                  </div>
+                  <span className="text-[10px] sm:text-xs font-bold text-muted-foreground w-8 sm:w-10 text-right">{item.value}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
 
   return (
     <div className="space-y-4 sm:space-y-6">
@@ -187,6 +267,13 @@ export default function Analytics() {
         </CardContent>
       </Card>
 
+      {/* Device, OS, Browser Analytics */}
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
+        {renderBarList(deviceData, "DEVICES")}
+        {renderBarList(osData, "OPERATING SYSTEMS")}
+        {renderBarList(browserData, "BROWSERS")}
+      </div>
+
       <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
         <Card>
           <CardContent className="p-4 sm:p-6">
@@ -210,31 +297,7 @@ export default function Analytics() {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardContent className="p-4 sm:p-6">
-            <h3 className="text-xs sm:text-sm font-bold text-foreground uppercase tracking-wider mb-4">TOP COUNTRIES</h3>
-            {countryData.length === 0 ? (
-              <p className="text-sm text-muted-foreground py-8 text-center">No click data yet</p>
-            ) : (
-              <div className="space-y-3">
-                {countryData.map((c, i) => (
-                  <div key={c.name} className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                      <span className="text-[10px] sm:text-xs font-bold text-muted-foreground w-4 sm:w-5">{i + 1}</span>
-                      <span className="text-xs sm:text-sm font-bold text-foreground truncate">{c.name}</span>
-                    </div>
-                    <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-                      <div className="w-16 sm:w-24 h-2 rounded-full bg-accent overflow-hidden">
-                        <div className="h-full rounded-full bg-primary" style={{ width: `${(c.value / (countryData[0]?.value || 1)) * 100}%` }} />
-                      </div>
-                      <span className="text-[10px] sm:text-xs font-bold text-muted-foreground w-8 sm:w-10 text-right">{c.value}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
+        {renderBarList(countryData, "TOP COUNTRIES")}
       </div>
 
       <Card>

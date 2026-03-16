@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 
 const stories = [
-  { quote: "I started sharing Megsy AI on my social media and within a few months, the recurring commissions became a meaningful income stream.", role: "Content Creator" },
-  { quote: "My tutorial videos about Megsy AI consistently bring in new signups. The recurring commission means my income grows every month.", role: "YouTuber" },
+  { quote: "I started sharing Megsy AI on my social media and within a few months, the forever commissions became a meaningful income stream.", role: "Content Creator" },
+  { quote: "My tutorial videos about Megsy AI consistently bring in new signups. The forever commission means my income grows every month.", role: "YouTuber" },
   { quote: "I mention Megsy AI in my weekly newsletter. The conversion rate is great because my audience trusts my recommendations.", role: "Newsletter Writer" },
 ];
 

@@ -34,7 +34,7 @@ export function PricingSection() {
             YOUR <span className="gradient-text">EARNINGS</span>
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-sm sm:text-base">
-            Earn 20% recurring commission on every plan. Here's what you make per referral.
+            Earn 20% commission forever on every plan. Here's what you make per referral.
           </p>
 
           <div className="flex items-center justify-center gap-3 sm:gap-4 mt-6 sm:mt-8">
