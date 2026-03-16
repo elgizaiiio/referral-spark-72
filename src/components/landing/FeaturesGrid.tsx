@@ -5,7 +5,7 @@ const features = [
   { title: "FAST PAYOUTS", description: "Withdraw your earnings anytime. No delays, no minimums." },
   { title: "MARKETING TOOLS", description: "Pre-built social media posts, email templates, and content ideas to maximize your conversions." },
   { title: "QR CODE SHARING", description: "Generate QR codes for your referral link. Perfect for events and offline sharing." },
-  { title: "20% RECURRING", description: "Earn 20% commission on every referral's subscription, every month, forever." },
+  { title: "20% FOREVER", description: "Earn 20% commission forever on every referral's subscription, every month, for life." },
   { title: "DEDICATED SUPPORT", description: "Get support from our partner success team to help maximize your earnings." },
   { title: "SOCIAL SHARING", description: "One-click sharing to WhatsApp, Twitter, Telegram, Facebook, and more." },
   { title: "DETAILED ANALYTICS", description: "Deep insights into your referral performance. Know what works and optimize." },

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 const stats = [
-  { value: "20%", label: "RECURRING COMMISSION" },
+  { value: "20%", label: "FOREVER COMMISSION" },
   { value: "$0", label: "MINIMUM PAYOUT" },
   { value: "90", label: "DAY COOKIE" },
   { value: "24H", label: "PAYOUT SPEED" },
