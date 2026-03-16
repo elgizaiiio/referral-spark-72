@@ -22,7 +22,7 @@ export function HeroSection() {
             WITH MEGSY
           </h1>
           <p className="mx-auto mt-6 sm:mt-8 max-w-2xl text-sm sm:text-lg text-muted-foreground sm:text-xl">
-            Share Megsy AI with your audience. Earn 20% recurring commission on every subscription. Build a real income stream.
+            Share Megsy AI with your audience. Earn 20% commission forever on every subscription. Build a real income stream.
           </p>
           <div className="mt-8 sm:mt-10 flex flex-col items-center gap-3 sm:gap-4 sm:flex-row sm:justify-center">
             <Button size="lg" className="gradient-cta glow-cta border-0 text-foreground text-base sm:text-lg px-8 sm:px-10 h-12 sm:h-14 hover:opacity-90 rounded-full font-bold w-full sm:w-auto" asChild>

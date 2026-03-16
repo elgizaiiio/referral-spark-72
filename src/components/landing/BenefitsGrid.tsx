@@ -4,7 +4,7 @@ const benefits = [
   { title: "ZERO COST TO JOIN", desc: "100% free to become a partner. No signup fees, no monthly charges, no hidden costs." },
   { title: "NO EXPERIENCE NEEDED", desc: "We provide all the tools and templates. Start earning even if you've never done affiliate marketing." },
   { title: "90-DAY COOKIE", desc: "If someone clicks your link and signs up within 90 days, you get the credit." },
-  { title: "RECURRING REVENUE", desc: "Earn commission every month for the lifetime of each referral's subscription." },
+  { title: "FOREVER REVENUE", desc: "Earn 20% commission forever for the lifetime of each referral's subscription." },
   { title: "INSTANT TRACKING", desc: "See clicks, signups, and earnings in real-time. No waiting for reports." },
   { title: "NO EARNINGS CAP", desc: "There's no limit on how much you can earn. Unlimited potential." },
 ];

@@ -35,7 +35,7 @@ export function CommissionInfo() {
         >
           <div className="text-center mb-8">
             <p className="text-6xl sm:text-7xl lg:text-8xl font-black gradient-text">20%</p>
-            <p className="mt-2 text-sm sm:text-lg text-muted-foreground">Recurring Commission</p>
+            <p className="mt-2 text-sm sm:text-lg text-muted-foreground">Commission Forever</p>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
