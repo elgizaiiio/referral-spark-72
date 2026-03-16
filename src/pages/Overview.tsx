@@ -69,7 +69,7 @@ export default function Overview() {
           <CardContent className="p-4 sm:p-5">
             <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider">COMMISSION RATE</p>
             <p className="text-xl sm:text-2xl font-black gradient-text mt-1">20%</p>
-            <p className="text-[10px] sm:text-xs text-muted-foreground mt-2 sm:mt-3">Flat rate on all plans, recurring forever</p>
+            <p className="text-[10px] sm:text-xs text-muted-foreground mt-2 sm:mt-3">Flat rate on all plans, forever</p>
           </CardContent>
         </Card>
       </div>

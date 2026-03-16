@@ -18,7 +18,7 @@ export function LegalSection() {
         <div className="space-y-4 sm:space-y-6 text-sm text-muted-foreground leading-relaxed">
           <div className="bg-card border border-border rounded-xl p-4 sm:p-6">
             <h3 className="text-xs sm:text-sm font-black text-foreground tracking-wider mb-2">COMMISSION STRUCTURE</h3>
-            <p className="text-xs sm:text-sm">Partners earn a flat 20% recurring commission on all subscription payments made by their referrals. Commissions are calculated on the net subscription amount after any applicable discounts or refunds.</p>
+            <p className="text-xs sm:text-sm">Partners earn a flat 20% forever commission on all subscription payments made by their referrals. Commissions are calculated on the net subscription amount after any applicable discounts or refunds.</p>
           </div>
           <div className="bg-card border border-border rounded-xl p-4 sm:p-6">
             <h3 className="text-xs sm:text-sm font-black text-foreground tracking-wider mb-2">COOKIE DURATION</h3>

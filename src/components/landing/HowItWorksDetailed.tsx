@@ -5,7 +5,7 @@ const steps = [
   { num: "02", title: "GET YOUR LINK", desc: "Receive your unique referral link instantly. Every click, every signup, every dollar tracked automatically.", color: "hsl(var(--step-red))" },
   { num: "03", title: "SHARE WITH YOUR AUDIENCE", desc: "Share on social media, blogs, emails, YouTube, or anywhere you have an audience.", color: "hsl(var(--step-purple))" },
   { num: "04", title: "WATCH SIGNUPS COME IN", desc: "Track every conversion in real-time on your dashboard. See who signed up, which plan they chose, and your commission.", color: "hsl(var(--step-green))" },
-  { num: "05", title: "GET PAID EVERY MONTH", desc: "Earn 20% recurring commission. Withdraw anytime. No minimum.", color: "hsl(var(--step-amber))" },
+  { num: "05", title: "GET PAID EVERY MONTH", desc: "Earn 20% commission forever. Withdraw anytime. No minimum.", color: "hsl(var(--step-amber))" },
 ];
 
 export function HowItWorksDetailed() {

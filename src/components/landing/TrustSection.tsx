@@ -26,7 +26,7 @@ export function TrustSection() {
             </div>
             <div>
               <p className="text-2xl sm:text-4xl font-black gradient-text">20%</p>
-              <p className="mt-1 text-[10px] sm:text-sm text-muted-foreground uppercase tracking-wider">Recurring</p>
+              <p className="mt-1 text-[10px] sm:text-sm text-muted-foreground uppercase tracking-wider">Forever</p>
             </div>
             <div>
               <p className="text-2xl sm:text-4xl font-black text-success">90 Days</p>

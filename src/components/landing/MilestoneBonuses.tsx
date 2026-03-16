@@ -22,7 +22,7 @@ export function MilestoneBonuses() {
           <h2 className="heading-massive text-4xl sm:text-5xl lg:text-7xl text-foreground">
             MILESTONE <span className="gradient-text">BONUSES</span>
           </h2>
-          <p className="text-muted-foreground mt-4">Extra rewards on top of your recurring commissions</p>
+          <p className="text-muted-foreground mt-4">Extra rewards on top of your forever commissions</p>
         </motion.div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

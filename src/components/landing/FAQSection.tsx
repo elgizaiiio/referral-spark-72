@@ -13,7 +13,7 @@ const faqs = [
   { q: "Is there a minimum payout?", a: "No. You can withdraw any amount at any time." },
   { q: "How does tracking work?", a: "Your unique referral link tracks all clicks and signups automatically with a 90-day cookie window. Our real-time dashboard shows you every conversion as it happens." },
   { q: "Can I promote on any platform?", a: "Yes! Share on social media, blogs, YouTube, email newsletters, WhatsApp groups, Discord, Reddit, or anywhere you have an audience." },
-  { q: "What is the commission rate?", a: "A flat 20% recurring commission on all plans. As long as your referral stays subscribed, you keep earning every month." },
+  { q: "What is the commission rate?", a: "A flat 20% forever commission on all plans. As long as your referral stays subscribed, you keep earning every month — forever." },
   { q: "How do I get started?", a: "Sign up for free, grab your unique referral link from the dashboard, and start sharing. You can start earning within minutes." },
   { q: "What is Megsy AI?", a: "Megsy AI is an all-in-one AI creative platform for image generation, video creation, chat assistance, and content templates. Plans start at just $9/month." },
   { q: "Can I use paid ads?", a: "Yes, you can run paid ads on Facebook, Google, Instagram, and more. However, you may not bid on Megsy AI branded keywords." },
