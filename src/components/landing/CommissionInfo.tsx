@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 const perks = [
-  "20% recurring commission on all subscriptions",
+  "20% commission forever on all subscriptions",
   "No cap on earnings — unlimited potential",
   "Real-time tracking dashboard",
   "Marketing tools and templates included",
