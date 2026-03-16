@@ -22,7 +22,7 @@ export function EarningExamples() {
           <h2 className="heading-massive text-3xl sm:text-5xl lg:text-7xl text-foreground">
             EARNING <span className="gradient-text">EXAMPLES</span>
           </h2>
-          <p className="text-muted-foreground mt-4 text-sm sm:text-base">Scenarios showing potential earnings with 20% recurring commission</p>
+          <p className="text-muted-foreground mt-4 text-sm sm:text-base">Scenarios showing potential earnings with 20% forever commission</p>
         </motion.div>
 
         <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-3">
