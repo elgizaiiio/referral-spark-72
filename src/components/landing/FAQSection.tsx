@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/accordion";
 
 const faqs = [
-  { q: "How much can I earn?", a: "You earn 20% recurring commission on every subscription made through your referral link. With plans ranging from $9 to $149/month, your potential is unlimited. There's no cap on earnings." },
+  { q: "How much can I earn?", a: "You earn 20% commission forever on every subscription made through your referral link. With plans ranging from $9 to $149/month, your potential is unlimited. There's no cap on earnings." },
   { q: "When do I get paid?", a: "You can request a withdrawal anytime. Most payouts are processed within 24-48 hours. There's no minimum withdrawal amount." },
   { q: "Do I need technical skills?", a: "Not at all. We provide marketing materials, social media templates, email copy, and more. Just share your link and earn." },
   { q: "Is there a minimum payout?", a: "No. You can withdraw any amount at any time." },
