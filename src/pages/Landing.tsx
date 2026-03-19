@@ -29,30 +29,48 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-background">
       <LandingNavbar />
-      <HeroSection />
-      <StatsBar />
-      <ProductShowcase />
-      <HowItWorks />
-      <HowItWorksDetailed />
-      <PricingSection />
-      <EarningsCalculator />
-      <EarningExamples />
-      <FeaturesGrid />
-      <BenefitsGrid />
-      <WhyMegsy />
-      <ToolsPreview />
-      <DashboardPreview />
-      <SocialTools />
-      <MarketingStrategies />
-      <ComparisonSection />
-      <TrustSection />
-      <SuccessStories />
-      <GlobalReach />
-      <PartnerSupport />
-      <CommissionInfo />
-      <LegalSection />
-      <FAQSection />
-      <CTAFooter />
+      <main>
+        <article itemScope itemType="https://schema.org/WebPage">
+          <HeroSection />
+          <StatsBar />
+          <ProductShowcase />
+          <section aria-label="How it works">
+            <HowItWorks />
+            <HowItWorksDetailed />
+          </section>
+          <section aria-label="Pricing and earnings">
+            <PricingSection />
+            <EarningsCalculator />
+            <EarningExamples />
+          </section>
+          <section aria-label="Features and benefits">
+            <FeaturesGrid />
+            <BenefitsGrid />
+            <WhyMegsy />
+          </section>
+          <section aria-label="Tools and dashboard">
+            <ToolsPreview />
+            <DashboardPreview />
+            <SocialTools />
+            <MarketingStrategies />
+          </section>
+          <section aria-label="Trust and social proof">
+            <ComparisonSection />
+            <TrustSection />
+            <SuccessStories />
+            <GlobalReach />
+          </section>
+          <section aria-label="Support and commission details">
+            <PartnerSupport />
+            <CommissionInfo />
+          </section>
+          <section aria-label="Legal and FAQ">
+            <LegalSection />
+            <FAQSection />
+          </section>
+          <CTAFooter />
+        </article>
+      </main>
       <LandingFooter />
     </div>
   );
